@@ -4,7 +4,7 @@ import styles from '../../styles/BuyTicketStyles';
 import AmountButton from '../../components/AmountButton';
 import CheckBox from '@react-native-community/checkbox';
 
-import { getVehicle, getBoating, getTentRentals } from '../../../api/service/service';
+import { getBoating, getTentRentals } from '../../../api/service/service';
 
 export default class ChoiceServiceScreen extends Component {
     state = {

@@ -54,6 +54,8 @@
 	<key>UIAppFonts</key>
 	<array>
 		<string>vinque rg.otf</string>
+		<string>hello honey.otf</string>
+		<string>MiraikatoScriptPERSONALUSE-Bold.otf</string>
 	</array>
 </dict>
 </plist>

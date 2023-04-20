@@ -15,6 +15,8 @@
 		7699B88040F8A987B510C191 /* libPods-ZooPlanner-ZooPlannerTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-ZooPlanner-ZooPlannerTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		9AFB59EAE1B74F139EBD38BB /* vinque rg.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7CD2ECA84E1245B69B2D9A1B /* vinque rg.otf */; };
+		6498BB4DA0F549D087B297FF /* hello honey.otf in Resources */ = {isa = PBXBuildFile; fileRef = B67C527401B24E3399E4EE81 /* hello honey.otf */; };
+		2AC09F6B7ECB43E096AFEC02 /* MiraikatoScriptPERSONALUSE-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6387F786BCC240C48C6A4376 /* MiraikatoScriptPERSONALUSE-Bold.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +48,8 @@
 		89C6BE57DB24E9ADA2F236DE /* Pods-ZooPlanner-ZooPlannerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZooPlanner-ZooPlannerTests.release.xcconfig"; path = "Target Support Files/Pods-ZooPlanner-ZooPlannerTests/Pods-ZooPlanner-ZooPlannerTests.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		7CD2ECA84E1245B69B2D9A1B /* vinque rg.otf */ = {isa = PBXFileReference; name = "vinque rg.otf"; path = "../assets/fonts/vinque rg.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		B67C527401B24E3399E4EE81 /* hello honey.otf */ = {isa = PBXFileReference; name = "hello honey.otf"; path = "../assets/fonts/hello honey.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		6387F786BCC240C48C6A4376 /* MiraikatoScriptPERSONALUSE-Bold.otf */ = {isa = PBXFileReference; name = "MiraikatoScriptPERSONALUSE-Bold.otf"; path = "../assets/fonts/MiraikatoScriptPERSONALUSE-Bold.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,6 +159,8 @@
 			isa = "PBXGroup";
 			children = (
 				7CD2ECA84E1245B69B2D9A1B /* vinque rg.otf */,
+				B67C527401B24E3399E4EE81 /* hello honey.otf */,
+				6387F786BCC240C48C6A4376 /* MiraikatoScriptPERSONALUSE-Bold.otf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -257,6 +263,8 @@
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				9AFB59EAE1B74F139EBD38BB /* vinque rg.otf in Resources */,
+				6498BB4DA0F549D087B297FF /* hello honey.otf in Resources */,
+				2AC09F6B7ECB43E096AFEC02 /* MiraikatoScriptPERSONALUSE-Bold.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

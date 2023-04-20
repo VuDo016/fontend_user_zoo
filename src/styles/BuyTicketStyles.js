@@ -133,13 +133,13 @@ const styles = StyleSheet.create({
         position: 'absolute',
         top: '5%',
         left: '2%',
-        zIndex: 1,
+        zIndex: 1
     },
     checkBox1: {
         position: 'absolute',
         top: '45%',
         left: '2%',
-        zIndex: 1,
+        zIndex: 1
     },
     viewTag: {
         height: 120,
