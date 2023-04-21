@@ -14,10 +14,10 @@ const styles = StyleSheet.create({
     },
     button: {
         height: '100%',
-        width: '90%',
+        width: '100%',
         backgroundColor: colors.text,
         borderRadius: 15,
-        borderWidth: 2,
+        borderWidth: 1.5,
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
@@ -30,6 +30,9 @@ const styles = StyleSheet.create({
     image: {
         height: '70%',
         width: '10%'
+    },
+    buttonBack: {
+        flex: 1
     }
 })
 

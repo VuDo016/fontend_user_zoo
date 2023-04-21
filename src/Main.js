@@ -12,6 +12,7 @@ import ChoiceServiceScreen from './screens/BuyTicket/ChoiceServiceScreen';
 import ChoiceVehicalScreen from './screens/BuyTicket/ChoiceVehicalScreen';
 import InfoBill from './screens/BuyTicket/InfoBill';
 import InforAnimal from './screens/Other/InforAnimal';
+import InforEvent from './screens/Other/InforEvent';
 
 const stack = createNativeStackNavigator();
 
@@ -36,6 +37,7 @@ export default class Main extends Component {
         <stack.Screen name="ChoiceVehicalScreen" component={ChoiceVehicalScreen} />
         <stack.Screen name="InfoBill" component={InfoBill} />
         <stack.Screen name="InforAnimal" component={InforAnimal} />
+        <stack.Screen name="InforEvent" component={InforEvent} />
       </stack.Navigator>
     </NavigationContainer>
     )

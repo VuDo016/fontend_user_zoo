@@ -40,7 +40,7 @@ export default class EventScreen extends Component {
           </>
         }
         renderItem={({ item }) => (
-          <TouchableOpacity style={styles.viewListEvent}>
+          <TouchableOpacity style={styles.viewListEvent} onPress={() => navigation.navigate('InforEvent', { data: item })}>
             <Image style={styles.imageEvent} source={{ uri: item.image }} />
             <Text style={styles.textDateEvent}>{item.date}</Text>
             <View style={styles.viewTextNameEvent}>

@@ -49,7 +49,7 @@ export default class TabBar extends Component {
       <Tab.Navigator
         screenOptions={{
           tabBarShowLabel: false,
-          tabBarStyle: { height: '13%', borderTopWidth: 2, borderTopColor: colors.mainHome }
+          tabBarStyle: { height: '10%', borderTopWidth: 1, borderTopColor: colors.greenDark }
         }}
       >
         <Tab.Screen

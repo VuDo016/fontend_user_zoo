@@ -64,31 +64,43 @@ const styles = StyleSheet.create({
         color: colors.mainDark
     },
     dropdown: {
-        width: '65%',
-        height: 10,
-        marginLeft: '10%'
+        width: '100%',
+        height: screenHeight / 14,
+        borderRadius: 15,
+        borderWidth: 1.5
     },
     viewRow: {
         width: '100%',
         flexDirection: 'row',
         alignItems: 'center',
+        justifyContent: 'space-between',
         zIndex: 100,
         marginVertical: '6%',
-        paddingHorizontal: '2%'
+        paddingHorizontal: '5%'
     },
     viewRow1: {
-        height: screenHeight / 10,
+        height: screenHeight / 6,
         justifyContent: 'space-between',
         width: '100%',
         alignItems: 'center',
-        marginVertical: '6%',
-        paddingHorizontal: '2%'
+        paddingHorizontal: '5%',
+        marginVertical: '5%'
     },
     textNumber: {
         fontSize: 18
     },
+    viewSelec: {
+        width: '60%'    
+    },
+    viewTest1: {
+        height: screenHeight / 2,
+        marginBottom: '5%',
+        alignItems: 'center'
+    },
     viewTest: {
-        height: screenHeight / 2
+        height: screenHeight / 2,
+        marginBottom: '20%',
+        alignItems: 'center'
     },
     viewFoot: {
         height: screenHeight / 6,
@@ -271,8 +283,7 @@ const styles = StyleSheet.create({
         alignItems: 'flex-start',
         justifyContent: 'space-between',
         paddingHorizontal: '5%',
-        marginVertical: '5%',
-        marginTop: '20%'
+        marginVertical: '3%'
     },
     imageEvent: {
         height: '50%',

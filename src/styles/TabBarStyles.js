@@ -11,8 +11,8 @@ const styles = (focused) => StyleSheet.create({
         justifyContent: 'center'
     },
     icon: {
-        width: 40,
-        height: 40,
+        width: 30,
+        height: 30,
         tintColor: focused ? colors.dark : colors.main
     },
     text: {

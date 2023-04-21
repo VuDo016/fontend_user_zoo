@@ -38,7 +38,7 @@ export default class AnimalScreen extends Component {
         style={styles.listAllAnimal}
         ListHeaderComponent={
           <>
-            <View style={styles.viewTest}>
+            <View style={styles.viewTest1}>
               <Image style={styles.imgTitle} source={require('../../../assets/images/titleAnimal.jpg')} />
               <View style={styles.viewText}>
                 <Text style={styles.textName}>Gặp gỡ</Text>
@@ -47,7 +47,9 @@ export default class AnimalScreen extends Component {
               </View>
               <View style={styles.viewRow}>
                 <Text style={styles.textNumber}>{size} Động Vật</Text>
-                <Dropdown />
+                <View style={styles.viewSelec}>
+                  <Dropdown />
+                </View>
               </View>
             </View>
           </>
