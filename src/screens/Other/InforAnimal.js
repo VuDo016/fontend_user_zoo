@@ -5,6 +5,7 @@ import Swiper from 'react-native-swiper';
 import styles from '../../styles/AnimalSttyles';
 import { getAllAnimal } from '../../../api/service/animal'
 import colors from '../../../assets/colors/colors';
+import ButtonBack from '../../components/ButtonBack';
 
 class InforAnimal extends Component {
   state = {
@@ -46,6 +47,7 @@ class InforAnimal extends Component {
         ListHeaderComponent={
           <>
             <View style={styles.viewSwip}>
+              <ButtonBack navigation = {navigation}/>
               <Text style={styles.textTile3}>{animal1.name}</Text>
               <Text style={styles.textSpecies}>{animal1.species}</Text>
               <Swiper showsButtons={true}

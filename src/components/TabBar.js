@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, Image } from 'react-native';
+import { Text, View, Image, TouchableOpacity } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import styles from '../styles/TabBarStyles';
@@ -45,11 +45,13 @@ const Tab = createBottomTabNavigator();
 
 export default class TabBar extends Component {
   render() {
+    const navigation = this.props.navigation
+    
     return (
       <Tab.Navigator
         screenOptions={{
           tabBarShowLabel: false,
-          tabBarStyle: { height: '10%', borderTopWidth: 1, borderTopColor: colors.greenDark }
+          tabBarStyle: { height: '10%', borderTopWidth: 2, borderTopColor: colors.mainHome }
         }}
       >
         <Tab.Screen
@@ -92,16 +94,16 @@ export default class TabBar extends Component {
           name="Ticket"
           options={{
             tabBarIcon: ({ focused }) => (
-              <View style={styles(focused).tabBarIcon}>
+              <TouchableOpacity style={styles(focused).tabBarIcon1} onPress={() => navigation.navigate('BuyTicketScreen')}>
                 <Image
                   source={require('../../assets/images/ticket.png')}
                   resizeMode='contain'
-                  style={styles(focused).icon}
+                  style={styles(focused).icon1}
                 />
-                <Text style={styles(focused).text}>
+                <Text style={styles(focused).text1}>
                   Mua vé
                 </Text>
-              </View>
+              </TouchableOpacity>
             ),
             headerShown: false
           }}

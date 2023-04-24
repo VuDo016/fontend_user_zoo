@@ -4,6 +4,7 @@ import Swiper from 'react-native-swiper';
 import { Dimensions } from 'react-native';
 
 import colors from '../../../assets/colors/colors';
+import ButtonBack from '../../components/ButtonBack';
 
 const screenHeight = Dimensions.get('screen').height;
 
@@ -24,6 +25,7 @@ export default class InforEvent extends Component {
     return (
       <ScrollView style={styles.big}>
         <View style={styles.container} >
+          <ButtonBack navigation={navigation} />
           <View style={styles.viewName}>
             <Text style={styles.name}>{event.name}</Text>
             <TouchableOpacity style={styles.buttonViewmore}>
@@ -73,8 +75,8 @@ export default class InforEvent extends Component {
           height={screenHeight / 1.7}
           activeDotColor={colors.mainHome}
           dotColor={colors.greenLight2}
-          dotStyle={{height: 20, width: 20, borderRadius: 100}}
-          activeDotStyle={{height: 20, width: 20, borderRadius: 100}}
+          dotStyle={{ height: 20, width: 20, borderRadius: 100 }}
+          activeDotStyle={{ height: 20, width: 20, borderRadius: 100 }}
         >
           {info.map((item, index) => (
             <TouchableOpacity key={index} style={styles.viewListEvent} onPress={() => navigation.navigate('InforEvent', { data: item })}>

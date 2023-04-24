@@ -10,13 +10,32 @@ const styles = (focused) => StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center'
     },
+    tabBarIcon1: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: '120%',
+        width: '90%',
+        marginBottom: '25%',
+        backgroundColor: colors.mainHome,
+        borderRadius: 200
+    },
     icon: {
         width: 30,
         height: 30,
         tintColor: focused ? colors.dark : colors.main
     },
+    icon1: {
+        width: 30,
+        height: 30,
+        tintColor: focused ? colors.dark : colors.text
+    },
     text: {
         color: focused ? colors.dark : colors.main, 
+        fontSize: 15,
+        fontWeight: 'bold'
+    },
+    text1: {
+        color: focused ? colors.dark : colors.text, 
         fontSize: 15,
         fontWeight: 'bold'
     },
