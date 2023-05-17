@@ -9,7 +9,6 @@ const styles = StyleSheet.create({
     container: {
         height: screenHeight,
         alignItems: 'center',
-        justifyContent: 'center',
         paddingHorizontal: 20,
         backgroundColor: '#fff',
     },
@@ -55,11 +54,9 @@ const styles = StyleSheet.create({
     },
     viewMid: {
         flexDirection: 'row',
+        marginVertical: '7%',
         width: '100%',
         justifyContent: 'space-between',
-        position: 'absolute',
-        left: '7%',
-        top: '5%'
     },
     imageLogo: {
         height: 150,

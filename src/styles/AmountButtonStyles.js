@@ -5,8 +5,10 @@ import colors from "../../assets/colors/colors";
 const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
-        borderWidth: 2,
-        borderRadius: 20
+        borderWidth: 1.5,
+        borderRadius: 20,
+        borderColor: colors.dark,
+        justifyContent: 'space-between'
     },
     button: {
         height: 30,
@@ -15,7 +17,7 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     text: {
-        fontSize: 15,
+        fontSize: 17,
         fontWeight: 'bold'
     }
 });

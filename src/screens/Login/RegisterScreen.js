@@ -3,13 +3,14 @@ import { View, TextInput, TouchableOpacity, Text, Image, ScrollView } from 'reac
 
 import styles from '../../styles/LoginStyles';
 import colors from '../../../assets/colors/colors';
+import { handle_SignIn_SignUp_KH } from '../../../api/method/post';
 
 export default class RegisterScreen extends Component {
   state = {
     name: '',
     email: '',
     password: '',
-    rememberMe: false
+    rePassword: ''
   };
 
   handleNameChange = (name) => {
@@ -24,18 +25,31 @@ export default class RegisterScreen extends Component {
     this.setState({ password });
   };
 
-  handleRememberMeChange = (rememberMe) => {
-    this.setState({ rememberMe });
+  handlerePasswordChange = (rePassword) => {
+    this.setState({ rePassword });
   };
 
-  handleLoginPress = () => {
-    const { email, password, rememberMe } = this.state;
-
-    // You can perform authentication here and navigate to the main app screen
-  };
+  async register(navigation) {
+    try {
+      if (this.state.password === this.state.rePassword) {
+        const data = await handle_SignIn_SignUp_KH(this.state.email, this.state.password, this.state.name, 2)
+        if (data.length !== 0) {
+          const newUser = {
+            email: this.state.email,
+            password: this.state.password
+          }
+          navigation.navigate('LoginScreen', { newUser: newUser })
+        }
+      }
+      else
+        alert('Mật khẩu nhập lại không trùng khớp !')
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   render() {
-    const { email, password, name, sdt } = this.state;
+    const { email, password, name, rePassword } = this.state;
     const navigation = this.props.navigation
 
     return (
@@ -67,16 +81,24 @@ export default class RegisterScreen extends Component {
           />
           <TextInput
             style={styles.input}
-            placeholder="Tạo một mật khẩu có ít nhất 5 ký tự"
+            placeholder="Tạo một mật khẩu có ít nhất 8 ký tự"
             placeholderTextColor={colors.mainDark}
             secureTextEntry
             value={password}
             onChangeText={this.handlePasswordChange}
           />
-          <TouchableOpacity style={styles.button} onPress={this.handleLoginPress}>
+          <TextInput
+            style={styles.input}
+            placeholder="Nhập lại mật khẩu"
+            placeholderTextColor={colors.mainDark}
+            secureTextEntry
+            value={rePassword}
+            onChangeText={this.handlerePasswordChange}
+          />
+          <TouchableOpacity style={styles.button} onPress={() => this.register(navigation)}>
             <Text style={styles.buttonText}>Đăng ký</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.viewBtnText1} onPress={() => navigation.navigate('LoginScreen')}>
+          <TouchableOpacity style={styles.viewBtnText1} onPress={() => navigation.navigate('LoginScreen', { newUser: null })}>
             <Text style={styles.textBottom1}>Bạn đã có tài khoản?</Text>
             <Text style={styles.textBottom}> Đăng nhập</Text>
           </TouchableOpacity>

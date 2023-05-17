@@ -21,7 +21,7 @@ export default class HomeScreen extends Component {
               <Text style={styles(true).textMid}>Sự Kiện</Text>
             </TouchableOpacity>
           </View>
-          <TouchableOpacity style={styles(true).viewBtn} onPress={() => navigation.navigate('LoginScreen')}>
+          <TouchableOpacity style={styles(true).viewBtn} onPress={() => navigation.navigate('LoginScreen', { newUser: null })}>
             <Text style={styles(true).textBtn}>ĐĂNG NHẬP</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles(false).viewBtn} onPress={() => navigation.navigate('RegisterScreen')}>

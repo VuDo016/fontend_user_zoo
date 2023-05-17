@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
     },
     image: {
         height: '80%',
-        width: '40%'
+        width: '80%'
     },
     image1: {
         height: '50%',
@@ -123,6 +123,14 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         marginRight: '5%',
         color: colors.mainHome
+    },
+    viewFoot: {
+      width: '100%',
+      alignItems: 'center'
+    },
+    textFoot: {
+      color: colors.orange,
+      fontWeight: '600'
     },
     viewTT: {
         height: '90%',

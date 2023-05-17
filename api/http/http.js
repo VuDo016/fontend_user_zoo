@@ -1,1 +1,1 @@
-export const https = 'http://192.168.1.155:3000/api/'
+export const https = 'https://fine-cyan-ladybug-tam.cyclic.app/api/'
