@@ -1,12 +1,38 @@
 import React, { Component } from 'react'
 import { View, Text, Image, FlatList, TouchableOpacity, ScrollView } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import styles from '../../styles/ProfileStyles';
 import colors from '../../../assets/colors/colors';
+import { getAllAccountID } from '../../../api/service/account'
 
 export default class ProfileScreen extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      userDetail: [],
+      token: ''
+    };
+  }
+
+  async getDataUser(cartData) {
+    const idUser = await AsyncStorage.getItem('user');
+    const token = await AsyncStorage.getItem('token');
+
+    this.setState({ userDetail: await getAllAccountID(JSON.parse(idUser), JSON.parse(token)) })
+    this.setState({ token: JSON.parse(token) })
+  }
+
+  componentDidMount() {
+    this.props.navigation.addListener('focus', async () => {
+      await this.getDataUser()
+    });
+  }
+
   render() {
     const navigation = this.props.navigation
+    const { userDetail, token } = this.state
+
     const info = [
       { id: '1', name: 'Vé của tôi', title: 'Xem lịch sử mua vé của bạn', icon: require('../../../assets/images/iconProfile/ticket.png') },
       { id: '2', name: 'Quyên góp', title: 'Dành tình yêu cho động vật - Ủng hộ Sở thú ngay!"', icon: require('../../../assets/images/iconProfile/donation.png') },
@@ -27,15 +53,17 @@ export default class ProfileScreen extends Component {
       <FlatList
         data={info}
         keyExtractor={({ id }, index) => id}
-        style={{backgroundColor: colors.text}}
+        style={{ backgroundColor: colors.text }}
         ListHeaderComponent={
           <>
             <View style={styles.container}>
               <View style={styles.header}>
                 <View style={styles.viewAvatar}>
-                  <Image style={styles.imageAvata} source={require('../../../assets/images/avatar/fox.png')} />
+                  {userDetail.avatar_url ? (
+                    <Image style={styles.imageAvata} source={{ uri: userDetail.avatar_url }} />
+                  ) : null}
                 </View>
-                <Text style={styles.text}>Vũ Đỗ</Text>
+                <Text style={styles.text}>{userDetail.name} {userDetail.first_name}</Text>
               </View>
               <Image style={styles.imageBackground} source={require('../../../assets/images/splash_bg.jpg')} />
               <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
@@ -51,7 +79,7 @@ export default class ProfileScreen extends Component {
         }
         renderItem={({ item }) => (
           <View style={styles.viewButton}>
-            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('InforUser')}>
+            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('InforUser', { data: userDetail, token: token })}>
               <View style={styles.viewAvatar1}>
                 <Image style={styles.image1} source={item.icon} />
               </View>

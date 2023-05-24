@@ -15,6 +15,8 @@ import InforAnimal from './screens/Other/InforAnimal';
 import InforEvent from './screens/Other/InforEvent';
 import VNpayScreen from './screens/BuyTicket/VNpayScreen';
 import InforUser from './screens/Other/InforUser';
+import EditUser from './screens/Other/EditUser';
+import ChangePass from './screens/Other/ChangePass';
 
 const stack = createNativeStackNavigator();
 
@@ -42,6 +44,8 @@ export default class Main extends Component {
         <stack.Screen name="InforEvent" component={InforEvent} />
         <stack.Screen name="VNpayScreen" component={VNpayScreen} />
         <stack.Screen name="InforUser" component={InforUser} />
+        <stack.Screen name="EditUser" component={EditUser} />
+        <stack.Screen name="ChangePass" component={ChangePass} />
       </stack.Navigator>
     </NavigationContainer>
     )

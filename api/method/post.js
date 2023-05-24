@@ -41,6 +41,9 @@ export const handle_SignIn_SignUp_KH = async (email, password, name, option) => 
         else if (resJson.message === "Mật khẩu phải có ít nhất 8 ký tự") {
             alert(resJson.message);
         }
+        else if (resJson.message === "Tên không hợp lệ") {
+            alert(resJson.message);
+        }
         else {
             alert(resJson.message);
             itemUser.push(resJson)

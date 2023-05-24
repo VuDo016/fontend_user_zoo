@@ -67,7 +67,7 @@ export default class RegisterScreen extends Component {
           </View>
           <TextInput
             style={styles.input}
-            placeholder="Nhập Tên của bạn"
+            placeholder="Nhập Họ tên đầy đủ của bạn"
             placeholderTextColor={colors.mainDark}
             value={name}
             onChangeText={this.handleNameChange}

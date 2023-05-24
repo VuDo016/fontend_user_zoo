@@ -47,8 +47,9 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     imageAvata: {
-        height: '80%',
-        width: '100%'
+        height: '100%',
+        width: '100%',
+        borderRadius: 100,
     },
     imageBackground: {
         height: screenHeight / 5.5,

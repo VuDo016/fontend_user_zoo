@@ -10,7 +10,7 @@ import { handle_SignIn_SignUp_KH } from '../../../api/method/post';
 export default class LoginScreen extends Component {
     state = {
         email: 'vudo456@gmail.com',
-        password: '12345vudo456',
+        password: '12345678',
         rememberMe: false
     };
 
@@ -27,8 +27,6 @@ export default class LoginScreen extends Component {
     };
 
     async checkLoginKhachHang(navigation) {
-        //vudo456@gmail.com
-        //12345vudo456
         try {
             const data = await handle_SignIn_SignUp_KH(this.state.email, this.state.password, '', 1)
             if (data[0].tokens.length !== 0) {
