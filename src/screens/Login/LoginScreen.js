@@ -9,8 +9,8 @@ import { handle_SignIn_SignUp_KH } from '../../../api/method/post';
 
 export default class LoginScreen extends Component {
     state = {
-        email: '',
-        password: '',
+        email: 'vudo456@gmail.com',
+        password: '12345vudo456',
         rememberMe: false
     };
 
@@ -27,11 +27,22 @@ export default class LoginScreen extends Component {
     };
 
     async checkLoginKhachHang(navigation) {
+        //vudo456@gmail.com
+        //12345vudo456
         try {
-            const token = await handle_SignIn_SignUp_KH(this.state.email, this.state.password, '', 1)
-            if (token.length !== 0) {
-                AsyncStorage.setItem('token', JSON.stringify(token))
-                navigation.navigate('TabBar')
+            const data = await handle_SignIn_SignUp_KH(this.state.email, this.state.password, '', 1)
+            if (data[0].tokens.length !== 0) {
+                AsyncStorage.setItem('token', JSON.stringify(data[0].tokens))
+                AsyncStorage.setItem('user', JSON.stringify(data[0].userId))
+                const previousScreen = navigation.getState().routes[navigation.getState().routes.length - 2]?.name;
+                // Kiểm tra tên màn hình trước đó và thực hiện xử lý tương ứng
+                if (previousScreen === 'InfoBill') {
+                    navigation.navigate('VNpayScreen')
+                } else if (previousScreen === 'HomeScreen') {
+                    navigation.navigate('TabBar')
+                } else if (previousScreen === 'RegisterScreen') {
+                    navigation.navigate('TabBar')
+                }
             }
         } catch (error) {
             console.log(error);
@@ -88,8 +99,8 @@ export default class LoginScreen extends Component {
                         />
                         <Text style={styles.rememberMeLabel}>Ghi nhớ đăng nhập</Text>
                     </View>
-                    <TouchableOpacity style={styles.button} onPress={this.handleLoginPress}>
-                        <Text style={styles.buttonText} onPress={() => this.checkLoginKhachHang(navigation)}>Đăng nhập</Text>
+                    <TouchableOpacity style={styles.button} onPress={() => this.checkLoginKhachHang(navigation)}>
+                        <Text style={styles.buttonText}>Đăng nhập</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.viewBtnText}>
                         <Text style={styles.textBottom}>Bạn quên mật khẩu?</Text>

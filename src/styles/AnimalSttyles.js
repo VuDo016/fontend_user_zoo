@@ -71,6 +71,7 @@ const styles = StyleSheet.create({
     },
     viewRow: {
         width: '100%',
+        height: screenHeight / 17,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
@@ -90,7 +91,11 @@ const styles = StyleSheet.create({
         fontSize: 18
     },
     viewSelec: {
-        width: '60%'    
+        width: '50%',
+        height: '100%',
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: colors.greenLight
     },
     viewTest1: {
         height: screenHeight / 2,
@@ -117,12 +122,20 @@ const styles = StyleSheet.create({
         backgroundColor: colors.mainHome,
         borderRadius: 20
     },
+    buttonViewmore1: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: '50%',
+        width: '80%',
+        backgroundColor: colors.dark2,
+        borderRadius: 20
+    },
     //////animalInfor/////////
     image1: {
         height: '100%',
         width: '100%',
         resizeMode: 'cover',
-        borderBottomLeftRadius: 50, 
+        borderBottomLeftRadius: 50,
         borderBottomRightRadius: 50
     },
     viewInfoTag: {
@@ -176,22 +189,70 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     animalListContainer1: {
-        marginTop: '15%',
-        height: screenHeight / 1.5,
+        height: screenHeight / 1.3,
         width: '100%',
         backgroundColor: colors.phaneon,
-        paddingTop: '5%',
-        alignItems: 'center',
-        justifyContent: 'center'
+        paddingTop: '20%'
     },
     infoDetail: {
-        height: '70%',
-        width: '80%',
+        height: '90%',
+        width: screenWidth / 1.1,
+        marginHorizontal: screenWidth / 15,
         backgroundColor: colors.text,
-        padding: '10%',
-        transform: [{rotate: '3deg'}]
+        padding: screenWidth / 17,
+        transform: [{ rotate: '2deg' }]
+    },
+    imgInfoDetail: {
+        height: '20%',
+        width: screenWidth / 5,
+        position: 'absolute',
+        right: screenWidth / 17,
+        top: '5%'
+    },
+    imgInconDetail: {
+        height: '5%',
+        width: screenWidth / 20,
+        position: 'absolute',
+        left: screenWidth / 40,
+        top: '3%'
+    },
+    imgiconIUCN: {
+        height: '100%',
+        width: '100%',
+        tintColor: 'red',
+        position: 'absolute'
+    },
+    viewIUCN: {
+        height: screenHeight / 10,
+        width: screenWidth,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        paddingHorizontal: '5%',
+        marginTop: '10%',
+        marginBottom: '30%'
+    },
+    viewIUCNitem: {
+        width: '80%',
+        marginLeft: '5%'
+    },
+    overlay: {
+        height: screenHeight / 10,
+        width: screenHeight / 10,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    viewtextinfoDetail1: {
+        height: 'auto',
+        width: '70%',
+        marginBottom: '10%'
     },
     textinfoDetail: {
+        fontSize: 15,
+        fontFamily: 'MiraikatoScriptPERSONALUSE-Bold',
+        color: colors.black
+    },
+    textinfoDetail1: {
         fontSize: 20,
         fontFamily: 'MiraikatoScriptPERSONALUSE-Bold',
         color: colors.black
@@ -209,24 +270,24 @@ const styles = StyleSheet.create({
         textDecorationLine: 'underline'
     },
     viewTitle: {
-        height: '8%',
+        height: '20%',
         width: '80%',
         backgroundColor: colors.violet,
         justifyContent: 'center',
         alignItems: 'center',
         position: 'absolute',
-        bottom: '28%',
+        bottom: '100%',
         zIndex: 1,
         left: '5%'
     },
     viewTitle1: {
-        height: '8%',
+        height: '20%',
         width: '80%',
         backgroundColor: colors.violet,
         justifyContent: 'center',
         alignItems: 'center',
         position: 'absolute',
-        bottom: '90%',
+        bottom: '105%',
         zIndex: 1,
         left: '5%'
     },
@@ -238,8 +299,8 @@ const styles = StyleSheet.create({
         top: '5%'
     },
     viewName1: {
-        height: '20%',
-        width: '50%',
+        flex: 1,
+        paddingHorizontal: '5%',
         backgroundColor: colors.orange,
         position: 'absolute',
         bottom: 0,
@@ -277,7 +338,7 @@ const styles = StyleSheet.create({
     },
     ////EVENT//////
     viewListEvent: {
-        height: screenHeight / 2.2,
+        height: screenHeight / 3,
         width: '100%',
         padding: '1%',
         alignItems: 'flex-start',
@@ -286,7 +347,7 @@ const styles = StyleSheet.create({
         marginVertical: '3%'
     },
     imageEvent: {
-        height: '50%',
+        height: '60%',
         width: '100%',
         borderRadius: 20
     },
@@ -298,7 +359,7 @@ const styles = StyleSheet.create({
     },
     viewTextNameEvent: {
         width: '80%',
-        height: '14%',
+        height: 'auto',
         justifyContent: 'center'
     },
     textNameEvent: {

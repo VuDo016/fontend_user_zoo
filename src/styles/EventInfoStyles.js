@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
         backgroundColor: colors.text
     },
     container: {
-        height: screenHeight * 1.6,
+        height: screenHeight * 1.45,
         backgroundColor: '#fff'
     },
     image: {
@@ -69,7 +69,8 @@ const styles = StyleSheet.create({
         height: '15%',
         width: '100%',
         justifyContent: 'space-between',
-        alignItems: "center"
+        alignItems: "center",
+        marginBottom: '10%'
     },
     viewRow1: {
         flexDirection: 'row',
@@ -116,10 +117,11 @@ const styles = StyleSheet.create({
         marginLeft: '16%'
     },
     viewDescription: {
-        height: screenHeight / 3.3,
+        height: screenHeight / 4,
         justifyContent: 'space-between',
         width: '100%',
-        marginVertical: '2%'
+        marginVertical: '2%',
+        paddingVertical: '5%'
     },
     location: {
         fontSize: 22,
@@ -136,7 +138,7 @@ const styles = StyleSheet.create({
         borderRadius: 20
     },
     viewListEvent: {
-        height: screenHeight / 2.2,
+        height: screenHeight / 2.7,
         width: '100%',
         padding: '1%',
         alignItems: 'flex-start',
@@ -145,7 +147,7 @@ const styles = StyleSheet.create({
         marginVertical: '3%'
     },
     imageEvent: {
-        height: '50%',
+        height: '60%',
         width: '100%',
         borderRadius: 20
     },

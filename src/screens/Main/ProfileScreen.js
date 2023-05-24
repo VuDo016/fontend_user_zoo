@@ -51,7 +51,7 @@ export default class ProfileScreen extends Component {
         }
         renderItem={({ item }) => (
           <View style={styles.viewButton}>
-            <TouchableOpacity style={styles.button}>
+            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('InforUser')}>
               <View style={styles.viewAvatar1}>
                 <Image style={styles.image1} source={item.icon} />
               </View>

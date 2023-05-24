@@ -4,21 +4,55 @@ import React, { Component } from 'react'
 import styles from '../../styles/AnimalSttyles';
 import Dropdown from '../../components/Dropdown';
 import DateChoice from '../../components/DateChoice';
-
+import { getAllEvent } from '../../../api/service/event';
 export default class EventScreen extends Component {
+  state = {
+    event: [],
+    isLoading: true,
+    limit: 5
+  };
+
+  async getAllEvent() {
+    try {
+      this.setState({ event: await getAllEvent() })
+    } catch (error) {
+      console.log(error);
+    } finally {
+      this.setState({ isLoading: false });
+    }
+  }
+
+  componentDidMount() {
+    this.getAllEvent();
+  }
+
+  setLimit(size) {
+    this.setState({ limit: size - 1 })
+  }
+
+  formatDate(dateInput) {
+    const date = new Date(dateInput);
+
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const year = date.getFullYear();
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+    const seconds = String(date.getSeconds()).padStart(2, '0');
+
+    const formattedTime = `NGÀY ${day} THÁNG ${month}`;
+    return formattedTime
+  }
+
   render() {
+    const { event, limit } = this.state;
     const navigation = this.props.navigation
-    const info = [
-      { id: '1', date: 'TỪ NGÀY 15 THÁNG 2 - NGÀY 8 THÁNG 11 ', name: 'Chuyến tham quan được mô tả bằng âm thanh', info: 'Các chuyến tham quan có hướng dẫn hàng tháng cho những người khiếm thị hoặc khiếm thị.', image: 'https://cms.londonzoo.org/sites/default/files/styles/responsive/public/592/350/1/2023-01/IMG_3088.jpg?itok=O6RsaU6r' },
-      { id: '2', date: 'TỪ NGÀY 11 THÁNG 2 - NGÀY 15 THÁNG 11 ', name: 'Tour ngôn ngữ ký hiệu của Anh', info: 'Tour diễn ra hàng tháng. Vào những ngày BSL, sẽ có hai chuyến tham quan kéo dài 2 giờ bằng Ngôn ngữ ký hiệu của Anh. Các chuyến tham quan khám phá các khu vực khác nhau của sở thú.', image: 'https://cms.londonzoo.org/sites/default/files/styles/responsive/public/592/350/1/2023-01/john-for-web.jpg?itok=8LyyITWk' },
-      { id: '3', date: 'TỪ NGÀY 15 THÁNG 2 - NGÀY 8 THÁNG 11 ', name: 'Chuyến tham quan được mô tả bằng âm thanh', info: 'Các chuyến tham quan có hướng dẫn hàng tháng cho những người khiếm thị hoặc khiếm thị.', image: 'https://cms.londonzoo.org/sites/default/files/styles/responsive/public/592/350/1/2023-01/john-for-web.jpg?itok=8LyyITWk' },
-      { id: '4', date: 'TỪ NGÀY 15 THÁNG 2 - NGÀY 8 THÁNG 11 ', name: 'Chuyến tham quan được mô tả bằng âm thanh', info: 'Các chuyến tham quan có hướng dẫn hàng tháng cho những người khiếm thị hoặc khiếm thị.', image: 'https://cms.londonzoo.org/sites/default/files/styles/responsive/public/592/350/1/2023-01/john-for-web.jpg?itok=8LyyITWk' },
-      { id: '5', date: 'TỪ NGÀY 15 THÁNG 2 - NGÀY 8 THÁNG 11 ', name: 'Chuyến tham quan được mô tả bằng âm thanh', info: 'Các chuyến tham quan có hướng dẫn hàng tháng cho những người khiếm thị hoặc khiếm thị.', image: 'https://cms.londonzoo.org/sites/default/files/styles/responsive/public/592/350/1/2023-01/john-for-web.jpg?itok=8LyyITWk' }
-    ]
+    const size = Object.keys(event).length;
+    const limitedData = event.slice(0, limit);
 
     return (
       <FlatList
-        data={info}
+        data={limitedData}
         keyExtractor={({ id }, index) => id}
         style={styles.listAllAnimal}
         ListHeaderComponent={
@@ -34,28 +68,35 @@ export default class EventScreen extends Component {
               </View>
               <View style={styles.viewRow1}>
                 <DateChoice />
-                <Dropdown />
+                <Dropdown size={'40%'} title={'Lọc theo'} />
               </View>
             </View>
           </>
         }
         renderItem={({ item }) => (
           <TouchableOpacity style={styles.viewListEvent} onPress={() => navigation.navigate('InforEvent', { data: item })}>
-            <Image style={styles.imageEvent} source={{ uri: item.image }} />
-            <Text style={styles.textDateEvent}>{item.date}</Text>
+            <Image style={styles.imageEvent} source={{ uri: item.image_url }} />
+            <Text style={styles.textDateEvent}>TỪ {this.formatDate(item.start_time)} - {this.formatDate(item.end_time)}</Text>
             <View style={styles.viewTextNameEvent}>
               <Text style={styles.textArrowEvent}>→</Text>
               <Text style={styles.textNameEvent}>{item.name}</Text>
             </View>
-            <Text style={styles.textInfoEvent}>{item.info}</Text>
+            <Text style={styles.textInfoEvent}>{item.description_short}</Text>
           </TouchableOpacity>
         )}
         ListFooterComponent={
           <>
             <View style={styles.viewFoot}>
-              <TouchableOpacity style={styles.buttonViewmore}>
-                <Text style={styles.textName}>Xem tất cả</Text>
-              </TouchableOpacity>
+              {
+                limit < (size - 1) ?
+                  <TouchableOpacity style={styles.buttonViewmore} onPress={() => this.setLimit(size)}>
+                    <Text style={styles.textName}>Xem tất cả</Text>
+                  </TouchableOpacity>
+                  :
+                  <View style={styles.buttonViewmore1}>
+                    <Text style={styles.textName}>Bạn đã xem tất sự kiện </Text>
+                  </View>
+              }
             </View>
           </>
         }

@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     },
     buttonBack: {
         height: screenHeight / 15,
-        width: '12%',
+        width: screenHeight / 15,
         backgroundColor: colors.black,
         justifyContent: 'center',
         alignItems: 'center',

@@ -20,7 +20,7 @@ export const handle_SignIn_SignUp_KH = async (email, password, name, option) => 
     const resJson = await response.json();
 
     if (option == 1) {
-        if (resJson.message === "Vui lòng nhập đủ tt !!!!") {
+        if (resJson.message === "Vui lòng nhập đủ thông tin!!!") {
             alert(resJson.message);
         }
         else if (resJson.message === "Email hoặc mật khẩu không đúng") {
@@ -28,7 +28,7 @@ export const handle_SignIn_SignUp_KH = async (email, password, name, option) => 
         }
         else {
             alert("Đăng nhập thành công");
-            itemUser.push(resJson.tokens)
+            itemUser.push(resJson)
         }
     }
     else {
@@ -48,4 +48,15 @@ export const handle_SignIn_SignUp_KH = async (email, password, name, option) => 
     }
 
     return itemUser
+}
+
+export const post = async (bodyData, url, data) => {
+    const response = await fetch(https + url,
+        {
+            method: "POST",
+            headers: { 'Content-Type': 'application/json; charset=utf-8' },
+            body: JSON.stringify(bodyData),
+        })
+    const resJson = await response.json();
+    return resJson[data]
 }

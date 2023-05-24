@@ -8,7 +8,8 @@ const screenWidth = Dimensions.get('screen').width;
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        height: 'auto',
+        width: '100%',
         justifyContent: 'space-between',
         alignItems: 'center',
         paddingBottom: '5%'
@@ -24,8 +25,8 @@ const styles = StyleSheet.create({
         zIndex: 1
     },
     viewAvatar: {
-        height: 160,
-        width: 160,
+        height: screenWidth / 2.5,
+        width: screenWidth / 2.5,
         padding: '1%',
         backgroundColor: colors.text,
         borderRadius: 100,
@@ -38,7 +39,9 @@ const styles = StyleSheet.create({
         height: 65,
         width: 65,
         padding: '1%',
-        backgroundColor: colors.main,
+        backgroundColor: colors.mainLight3,
+        borderColor: colors.main,
+        borderWidth: 1,
         borderRadius: 100,
         justifyContent: 'center',
         alignItems: 'center'
@@ -50,7 +53,7 @@ const styles = StyleSheet.create({
     imageBackground: {
         height: screenHeight / 5.5,
         width: '100%',
-        marginBottom: screenHeight / 5
+        marginBottom: '30%'
     },
     viewItem: {
         marginHorizontal: screenWidth / 21,
@@ -70,7 +73,7 @@ const styles = StyleSheet.create({
     },
     viewButton: {
         width: '100%',
-        height: screenHeight / 5,
+        height: screenHeight / 5.5,
         justifyContent: 'center',
         alignItems: 'center'
     },

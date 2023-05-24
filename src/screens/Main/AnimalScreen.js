@@ -9,6 +9,7 @@ export default class AnimalScreen extends Component {
   state = {
     animal: [],
     isLoading: true,
+    limit: 10
   };
 
   async getAllAnimal() {
@@ -21,18 +22,23 @@ export default class AnimalScreen extends Component {
     }
   }
 
+  setLimit() {
+    this.setState({ limit: this.state.limit + 10 })
+  }
+
   componentDidMount() {
     this.getAllAnimal();
   }
 
   render() {
-    const { animal } = this.state;
+    const { animal, limit } = this.state;
     const navigation = this.props.navigation
     const size = Object.keys(animal).length;
+    const limitedData = animal.slice(0, limit);
 
     return (
       <FlatList
-        data={animal}
+        data={limitedData}
         keyExtractor={({ id }, index) => id}
         numColumns={2}
         style={styles.listAllAnimal}
@@ -48,7 +54,7 @@ export default class AnimalScreen extends Component {
               <View style={styles.viewRow}>
                 <Text style={styles.textNumber}>{size} Động Vật</Text>
                 <View style={styles.viewSelec}>
-                  <Dropdown />
+                  <Dropdown size={'100%'} title={'Loại động vật'} />
                 </View>
               </View>
             </View>
@@ -56,17 +62,24 @@ export default class AnimalScreen extends Component {
         }
         renderItem={({ item }) => (
           <TouchableOpacity style={styles.viewList} onPress={() => navigation.navigate('InforAnimal', { data: item })}>
-            <Image style={styles.image} source={{ uri: item.images[2] }} />
+            <Image style={styles.image} source={{ uri: item.images[0] }} />
             <Text style={styles.textName1}>{item.name}</Text>
           </TouchableOpacity>
         )}
         ListFooterComponent={
           <>
             <View style={styles.viewFoot}>
-              <Text style={styles.textNumber}>Bạn đã xem 40 trên 82 động vật</Text>
-              <TouchableOpacity style={styles.buttonViewmore}>
-                <Text style={styles.textName}>Xem thêm</Text>
-              </TouchableOpacity>
+              <Text style={styles.textNumber}>Bạn đã xem {limit < size ? limit : size} trên {size} động vật</Text>
+              {
+                limit < size ?
+                  <TouchableOpacity style={styles.buttonViewmore} onPress={() => this.setLimit()}>
+                    <Text style={styles.textName}>Xem thêm</Text>
+                  </TouchableOpacity>
+                  :
+                  <View style={styles.buttonViewmore1}>
+                    <Text style={styles.textName}>Bạn đã xem tất cả động vật</Text>
+                  </View>
+              }
             </View>
           </>
         }

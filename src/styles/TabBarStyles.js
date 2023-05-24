@@ -3,6 +3,7 @@ import {Dimensions} from 'react-native';
 
 import colors from "../../assets/colors/colors";
 const screenHeight  = Dimensions.get('screen').height;
+const screenWidth  = Dimensions.get('screen').width;
 
 const styles = (focused) => StyleSheet.create({
     /////tabBar////
@@ -13,8 +14,8 @@ const styles = (focused) => StyleSheet.create({
     tabBarIcon1: {
         alignItems: 'center',
         justifyContent: 'center',
-        height: '120%',
-        width: '90%',
+        height: screenWidth / 5,
+        width: screenWidth / 5,
         marginBottom: '25%',
         backgroundColor: colors.mainHome,
         borderRadius: 200

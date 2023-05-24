@@ -109,7 +109,7 @@ export default class ChoiceServiceScreen extends Component {
                                     <Image style={styles.image1} source={{ uri: item.image }} />
                                     <View style={styles.viewTT}>
                                         <Text numberOfLines={2} style={styles.textType}> Thuyền {item.number_seats} chỗ</Text>
-                                        <Text style={styles.textPrice}>{item.price} vnđ</Text>
+                                        <Text style={styles.textPrice}>{item.price.toLocaleString()} vnđ</Text>
                                         <AmountButton onAmountChange={(amount) => this.handleTicketAmountChange(index, amount)} />
                                     </View>
                                 </View>
@@ -131,7 +131,7 @@ export default class ChoiceServiceScreen extends Component {
                                     <Image style={styles.image1} source={{ uri: item.image }} />
                                     <View style={styles.viewTT}>
                                         <Text style={styles.textType}>Lều {item.number_seats} người</Text>
-                                        <Text style={styles.textPrice}>{item.price} vnđ</Text>
+                                        <Text style={styles.textPrice}>{item.price.toLocaleString()} vnđ</Text>
                                         <AmountButton onAmountChange={(amount) => this.handleTicketAmountChange(index + 2, amount)} />
                                     </View>
                                 </View>

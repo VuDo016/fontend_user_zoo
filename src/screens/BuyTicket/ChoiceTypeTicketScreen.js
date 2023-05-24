@@ -84,7 +84,7 @@ export default class ChoiceTypeTicket extends Component {
                                 </View>
                                 <View style={styles.viewTT}>
                                     <Text style={styles.textType}>{item.ticket_type}</Text>
-                                    <Text style={styles.textPrice}>{item.price} vnđ</Text>
+                                    <Text style={styles.textPrice}>{item.price.toLocaleString()} vnđ</Text>
                                     <AmountButton onAmountChange={(amount) => this.handleTicketAmountChange(index, amount)} />
                                 </View>
                             </View>
