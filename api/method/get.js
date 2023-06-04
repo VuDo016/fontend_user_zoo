@@ -21,8 +21,12 @@ export const getByValue1 = async (url, data, value, token) => {
     return resJson[data]
 }
 
-export const getByValue = async (url, value) => {
-    const response = await fetch(https + url + '/' + value);
+export const getByValue = async (url, value, token) => {
+    const response = await fetch(https + url + '/' + value,
+    {
+        method: "GET",
+        headers: { 'Authorization': token }
+    });
     const resJson = await response.json();
     return resJson
 }

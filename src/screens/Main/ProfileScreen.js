@@ -19,8 +19,8 @@ export default class ProfileScreen extends Component {
     const idUser = await AsyncStorage.getItem('user');
     const token = await AsyncStorage.getItem('token');
 
-    this.setState({ userDetail: await getAllAccountID(JSON.parse(idUser), JSON.parse(token)) })
-    this.setState({ token: JSON.parse(token) })
+    this.setState({ userDetail: await getAllAccountID(JSON.parse(idUser), JSON.parse(token).accessToken) })
+    this.setState({ token: JSON.parse(token).accessToken })
   }
 
   componentDidMount() {
@@ -39,7 +39,7 @@ export default class ProfileScreen extends Component {
       { id: '3', name: 'Sản phẩm của tôi', title: 'Xem lịch sử mua hàng của bạn', icon: require('../../../assets/images/iconProfile/cart.png'), screem: 'InforUser' },
       { id: '4', name: 'Danh sách yêu thích', title: 'TÌm kiếm danh sách động vật hay sự kiện yêu thích', icon: require('../../../assets/images/iconProfile/like.png'), screem: 'InforUser' },
       { id: '5', name: 'Thông tin', title: 'Xem thông tin cá nhân của bạn', icon: require('../../../assets/images/iconProfile/info.png'), screem: 'InforUser' },
-      { id: '6', name: 'Liên hệ chúng tôi', title: 'Bạn đang gặp khó khăn - Liên hệ ngay với chúng tôi!', icon: require('../../../assets/images/iconProfile/call.png'), screem: 'InforUser' }
+      { id: '6', name: 'Liên hệ chúng tôi', title: 'Bạn đang gặp khó khăn - Liên hệ ngay với chúng tôi!', icon: require('../../../assets/images/iconProfile/call.png'), screem: 'ContactUs' }
     ]
 
     const img = [

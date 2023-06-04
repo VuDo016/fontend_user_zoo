@@ -2,6 +2,7 @@ import { Text, View, ImageBackground, Image, TouchableOpacity } from 'react-nati
 import React, { Component } from 'react'
 
 import styles from '../styles/HomeStyles'
+import ContactUs from './Other/ContactUs'
 
 export default class HomeScreen extends Component {
   render() {

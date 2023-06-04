@@ -1,12 +1,17 @@
 import { StyleSheet } from "react-native"
+import {Dimensions} from 'react-native';
 
-import colors from "../../assets/colors/colors"
+import colors from "../../assets/colors/colors";
+
+const screenHeight  = Dimensions.get('screen').height;
+const screenWidth  = Dimensions.get('screen').width;
 
 const styles = StyleSheet.create({
     header: {
-        height: '13%',
+        height: screenHeight / 10,
         backgroundColor: colors.greenLight2,
-        flexDirection: 'row'
+        flexDirection: 'row',
+        alignItems: 'center'
     },
     btnEdit: {
         marginTop: 25,
@@ -17,7 +22,6 @@ const styles = StyleSheet.create({
     iconArrow: {
         height: 20,
         width: 20,
-        marginTop: 50,
         marginLeft: 15
     },
     iconEdit: {
@@ -25,7 +29,6 @@ const styles = StyleSheet.create({
         width: 30
     },
     textTitle: {
-        marginTop: 42,
         fontSize: 25,
         marginLeft: 20
     },
@@ -140,6 +143,44 @@ const styles = StyleSheet.create({
     textGenderNot: {
         fontSize: 20,
         color: colors.orange
+    },
+    ////////////////Contact US/////////
+    itemChat: {
+        height: '10%',
+        width: '100%',
+        flexDirection: 'row',
+        alignItems: 'center' 
+    },
+    iconChat: {
+        height: screenWidth / 15,
+        width: screenWidth / 15,
+        marginRight: '5%'
+    },
+    textChat: {
+        fontSize: 17,
+        fontWeight: 'bold',
+        color: colors.black
+    },
+    viewTextChat: {
+        height: 'auto',
+        marginVertical: '10%'
+    },
+    textInputChat: {
+        borderBottomWidth: 2,
+        borderColor: colors.mainDark,
+        fontSize: 17,
+        marginVertical: '5%',
+        color: colors.black
+    },
+    infoChat: {
+        backgroundColor: colors.whiteDarkLight,
+        height: 'auto',
+        width: 'auto',
+        margin: '5%',
+        paddingVertical: '10%',
+        paddingHorizontal: '5%',
+        borderWidth: 2,
+        borderColor: colors.main
     }
 })
 

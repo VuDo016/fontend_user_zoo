@@ -21,6 +21,7 @@ import ChangePass from './screens/Other/ChangePass';
 import TicketsPaidScreen from './screens/BuyTicket/TicketsPaidScreen';
 import HisTicket from './screens/Other/HisTicket';
 import CreateNew from './components/Comment/CreateComment';
+import ContactUs from './screens/Other/ContactUs';
 
 const stack = createNativeStackNavigator();
 
@@ -53,6 +54,7 @@ export default class Main extends Component {
         <stack.Screen name="TicketsPaidScreen" component={TicketsPaidScreen} />
         <stack.Screen name="HisTicket" component={HisTicket} />
         <stack.Screen name="CreateNew" component={CreateNew} />
+        <stack.Screen name="ContactUs" component={ContactUs} />
       </stack.Navigator>
     </NavigationContainer>
     )

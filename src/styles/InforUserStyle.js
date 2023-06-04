@@ -9,10 +9,10 @@ const styles = StyleSheet.create({
     header: {
         flex: 1,
         backgroundColor: colors.greenLight2,
-        flexDirection: 'row'
+        flexDirection: 'row',
+        alignItems: 'center'
     },
     btnEdit: {
-        marginTop: 25,
         flex: 0.2,
         justifyContent: 'center',
         alignItems: 'center'
@@ -20,7 +20,6 @@ const styles = StyleSheet.create({
     iconArrow: {
         height: 20,
         width: 20,
-        marginTop: 50,
         marginLeft: 15
     },
     iconEdit: {
@@ -29,7 +28,6 @@ const styles = StyleSheet.create({
         tintColor: colors.greenDark
     },
     textTitle: {
-        marginTop: 42,
         fontSize: 25,
         marginLeft: 20
     },
