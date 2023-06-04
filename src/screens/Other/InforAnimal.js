@@ -79,7 +79,7 @@ class InforAnimal extends Component {
             <View style={styles.viewSwip}>
               <ButtonBack navigation={navigation} />
               <Text style={styles.textTile3}>{animal1.name}</Text>
-              <Text style={styles.textSpecies}>{animal1.species}</Text>
+              <Text style={styles.textSpecies}>{animal1.name2}</Text>
               <Swiper showsButtons={true}
                 showsPagination={true}
                 activeDotColor={colors.greenLight}

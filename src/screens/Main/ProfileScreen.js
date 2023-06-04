@@ -34,12 +34,12 @@ export default class ProfileScreen extends Component {
     const { userDetail, token } = this.state
 
     const info = [
-      { id: '1', name: 'Vé của tôi', title: 'Xem lịch sử mua vé của bạn', icon: require('../../../assets/images/iconProfile/ticket.png') },
-      { id: '2', name: 'Quyên góp', title: 'Dành tình yêu cho động vật - Ủng hộ Sở thú ngay!"', icon: require('../../../assets/images/iconProfile/donation.png') },
-      { id: '3', name: 'Sản phẩm của tôi', title: 'Xem lịch sử mua hàng của bạn', icon: require('../../../assets/images/iconProfile/cart.png') },
-      { id: '4', name: 'Danh sách yêu thích', title: 'TÌm kiếm danh sách động vật hay sự kiện yêu thích', icon: require('../../../assets/images/iconProfile/like.png') },
-      { id: '5', name: 'Thông tin', title: 'Xem thông tin cá nhân của bạn', icon: require('../../../assets/images/iconProfile/info.png') },
-      { id: '6', name: 'Liên hệ chúng tôi', title: 'Bạn đang gặp khó khăn - Liên hệ ngay với chúng tôi!', icon: require('../../../assets/images/iconProfile/call.png') }
+      { id: '1', name: 'Vé của tôi', title: 'Xem lịch sử mua vé của bạn', icon: require('../../../assets/images/iconProfile/ticket.png'), screem: 'HisTicket' },
+      { id: '2', name: 'Quyên góp', title: 'Dành tình yêu cho động vật - Ủng hộ Sở thú ngay!"', icon: require('../../../assets/images/iconProfile/donation.png'), screem: 'InforUser' },
+      { id: '3', name: 'Sản phẩm của tôi', title: 'Xem lịch sử mua hàng của bạn', icon: require('../../../assets/images/iconProfile/cart.png'), screem: 'InforUser' },
+      { id: '4', name: 'Danh sách yêu thích', title: 'TÌm kiếm danh sách động vật hay sự kiện yêu thích', icon: require('../../../assets/images/iconProfile/like.png'), screem: 'InforUser' },
+      { id: '5', name: 'Thông tin', title: 'Xem thông tin cá nhân của bạn', icon: require('../../../assets/images/iconProfile/info.png'), screem: 'InforUser' },
+      { id: '6', name: 'Liên hệ chúng tôi', title: 'Bạn đang gặp khó khăn - Liên hệ ngay với chúng tôi!', icon: require('../../../assets/images/iconProfile/call.png'), screem: 'InforUser' }
     ]
 
     const img = [
@@ -79,7 +79,7 @@ export default class ProfileScreen extends Component {
         }
         renderItem={({ item }) => (
           <View style={styles.viewButton}>
-            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('InforUser', { data: userDetail, token: token })}>
+            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate(item.screem, { data: userDetail, token: token })}>
               <View style={styles.viewAvatar1}>
                 <Image style={styles.image1} source={item.icon} />
               </View>

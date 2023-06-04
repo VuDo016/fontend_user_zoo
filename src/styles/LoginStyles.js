@@ -58,10 +58,6 @@ const styles = StyleSheet.create({
         width: '100%',
         justifyContent: 'space-between',
     },
-    imageLogo: {
-        height: 150,
-        width: 150
-    },
     textTitle: {
         fontSize: 30,
         color: colors.dark,

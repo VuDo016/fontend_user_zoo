@@ -30,8 +30,7 @@ const styles = StyleSheet.create({
         marginLeft: 20
     },
     info: {
-        backgroundColor: colors.whiteDarkLight,
-        marginVertical: 10
+        backgroundColor: colors.whiteDarkLight
     },
     imageCover: {
         height: 200,

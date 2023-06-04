@@ -14,7 +14,7 @@ export const handle_SignIn_SignUp_KH = async (email, password, name, option) => 
             body: JSON.stringify({
                 email: email,
                 password: password,
-                name : name
+                name: name
             }),
         })
     const resJson = await response.json();
@@ -63,3 +63,39 @@ export const post = async (bodyData, url, data) => {
     const resJson = await response.json();
     return resJson[data]
 }
+
+export const uploadImage = async (imageUris, url, type, value) => {
+    try {
+        const apiUrl = `${https}${url}/${type}/${value}`;
+
+        const formData = new FormData();
+
+        imageUris.forEach((imageUri, index) => {
+            const extension = imageUri.split('.').pop();
+
+            formData.append("images", {
+                uri: imageUri,
+                type: `image/${extension}`,
+                name: `image_${index}.${extension}`
+            });
+        });
+
+        console.log(formData["_parts"][0][1]);
+
+        const response = await fetch(apiUrl, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        });
+
+        if (response.ok) {
+            console.log('Upload success!');
+        } else {
+            console.log('Upload failed!');
+        }
+    } catch (error) {
+        console.error(error);
+    }
+};

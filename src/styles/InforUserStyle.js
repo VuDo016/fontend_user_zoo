@@ -35,8 +35,7 @@ const styles = StyleSheet.create({
     },
     info: {
         flex: 7,
-        backgroundColor: colors.whiteDarkLight,
-        marginVertical: 10
+        backgroundColor: colors.whiteDarkLight
     },
     imageCover: {
         height: 200,

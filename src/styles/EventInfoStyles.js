@@ -75,14 +75,14 @@ const styles = StyleSheet.create({
     viewRow1: {
         flexDirection: 'row',
         height: '12%',
-        width: '25%',
-        justifyContent: 'space-between',
+        width: '100%',
         alignItems: "center"
     },
     icon: {
         height: 35,
         width: 35,
-        tintColor: colors.mainDark
+        tintColor: colors.mainDark,
+        marginRight: '5%'
     },
     eventType: {
         fontSize: 24,
@@ -113,8 +113,7 @@ const styles = StyleSheet.create({
     },
     priceText: {
         fontSize: 19,
-        color: colors.mainDark,
-        marginLeft: '16%'
+        color: colors.mainDark
     },
     viewDescription: {
         height: screenHeight / 4,

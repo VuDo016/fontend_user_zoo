@@ -1,4 +1,4 @@
-import { getAll } from "../method/get";
+import { getAll, getByValue1 } from "../method/get";
 import { post } from "../method/post";
 
 export const getVehicle = async () => {
@@ -15,6 +15,22 @@ export const getTentRentals = async () => {
 
 export const getTicketCategory = async () => {
     return await getAll('ticket/ticket', 'ticketCategories')
+}
+
+export const getBillNew = async () => {
+    return await getAll('ticket/bill', 'latestBill')
+}
+
+export const getListTicketNew = async () => {
+    return await getAll('ticket/bill', 'tickets')
+}
+
+export const getListServiceNew = async () => {
+    return await getAll('ticket/bill', 'services')
+}
+
+export const getBillById = async (id) => {
+    return await getByValue1('ticket/billByID', 'bills', id)
 }
 
 ///post////
@@ -48,4 +64,13 @@ export const createService = async (quantity, serviceCategoryId, ticketHistoryId
     }
 
     return await post(bodyData, 'ticket/service', 'success')
+}
+
+export const updateQRcode = async (dataQRcode, userId) => {
+    const bodyData = {
+        userId: userId,
+        paymentData: dataQRcode
+    }
+
+    return await post(bodyData, 'ticket/generate-qr-code', 'success')
 }

@@ -1,20 +1,40 @@
-import { Image, Text, View, FlatList, TouchableOpacity } from 'react-native'
+import { Image, Text, View, FlatList, TouchableOpacity, RefreshControl } from 'react-native'
 import React, { Component } from 'react'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import styles from '../../styles/AnimalSttyles';
 import Dropdown from '../../components/Dropdown';
 import DateChoice from '../../components/DateChoice';
-import { getAllEvent } from '../../../api/service/event';
+import { getAllEvent, getEventByDate } from '../../../api/service/event';
+import Comment from '../../components/Comment/Comment';
+
 export default class EventScreen extends Component {
-  state = {
-    event: [],
-    isLoading: true,
-    limit: 5
-  };
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      event: [],
+      isLoading: true,
+      limit: 5,
+      refreshing: false,
+      token: ''
+    };
+  }
+
+  refreshData() {
+    this.setState({ refreshing: true });
+
+    // Gọi lại hàm getAllEvent để lấy dữ liệu sự kiện ban đầu
+    this.getAllEvent().then(() => {
+      this.setState({ refreshing: false });
+    });
+  }
 
   async getAllEvent() {
+    const token = this.state.token
+
     try {
-      this.setState({ event: await getAllEvent() })
+      this.setState({ event: await getAllEvent(token) })
     } catch (error) {
       console.log(error);
     } finally {
@@ -22,7 +42,10 @@ export default class EventScreen extends Component {
     }
   }
 
-  componentDidMount() {
+  async componentDidMount() {
+    const token = await AsyncStorage.getItem('token');
+    const cartData = JSON.parse(token);
+    this.setState({ token: cartData.accessToken });
     this.getAllEvent();
   }
 
@@ -44,6 +67,12 @@ export default class EventScreen extends Component {
     return formattedTime
   }
 
+  handleDateChange = async (date) => {
+    const token = this.state.token
+    // Xử lý sự kiện onChange ở đây
+    this.setState({ event: await getEventByDate(date, token) })
+  }
+
   render() {
     const { event, limit } = this.state;
     const navigation = this.props.navigation
@@ -55,6 +84,12 @@ export default class EventScreen extends Component {
         data={limitedData}
         keyExtractor={({ id }, index) => id}
         style={styles.listAllAnimal}
+        refreshControl={
+          <RefreshControl
+            refreshing={this.state.refreshing}
+            onRefresh={() => this.refreshData()}
+          />
+        }
         ListHeaderComponent={
           <>
             <View style={styles.viewTest}>
@@ -67,7 +102,7 @@ export default class EventScreen extends Component {
                 </Text>
               </View>
               <View style={styles.viewRow1}>
-                <DateChoice />
+                <DateChoice onDateChange={this.handleDateChange} />
                 <Dropdown size={'40%'} title={'Lọc theo'} />
               </View>
             </View>
@@ -87,6 +122,7 @@ export default class EventScreen extends Component {
         ListFooterComponent={
           <>
             <View style={styles.viewFoot}>
+              <Comment navigation={navigation} />
               {
                 limit < (size - 1) ?
                   <TouchableOpacity style={styles.buttonViewmore} onPress={() => this.setLimit(size)}>

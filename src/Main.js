@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
+
 import SplashScreen from './screens/SplashScreen';
 import TabBar from './components/TabBar';
 import HomeScreen from './screens/HomeScreen';
@@ -17,6 +18,9 @@ import VNpayScreen from './screens/BuyTicket/VNpayScreen';
 import InforUser from './screens/Other/InforUser';
 import EditUser from './screens/Other/EditUser';
 import ChangePass from './screens/Other/ChangePass';
+import TicketsPaidScreen from './screens/BuyTicket/TicketsPaidScreen';
+import HisTicket from './screens/Other/HisTicket';
+import CreateNew from './components/Comment/CreateComment';
 
 const stack = createNativeStackNavigator();
 
@@ -46,6 +50,9 @@ export default class Main extends Component {
         <stack.Screen name="InforUser" component={InforUser} />
         <stack.Screen name="EditUser" component={EditUser} />
         <stack.Screen name="ChangePass" component={ChangePass} />
+        <stack.Screen name="TicketsPaidScreen" component={TicketsPaidScreen} />
+        <stack.Screen name="HisTicket" component={HisTicket} />
+        <stack.Screen name="CreateNew" component={CreateNew} />
       </stack.Navigator>
     </NavigationContainer>
     )

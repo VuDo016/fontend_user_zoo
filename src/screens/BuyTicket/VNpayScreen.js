@@ -4,7 +4,7 @@ import urlParse from 'url-parse';
 import WebView from 'react-native-webview';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import { createBill, createService, createTicket } from '../../../api/service/ticket';
+import { createBill, createService, createTicket, updateQRcode } from '../../../api/service/ticket';
 
 export default class VNpayScreen extends Component {
   constructor(props) {
@@ -49,12 +49,17 @@ export default class VNpayScreen extends Component {
         const { vnp_ResponseCode, vnp_TransactionStatus } = parsedUrl.query;
 
         if (vnp_ResponseCode === '00' && vnp_TransactionStatus === '00') {
-          this.props.navigation.navigate('TabBar')
-          alert('Giao dịch thành công')
-
           const ticket = this.state.ticket
 
           const idBill = await createBill(ticket.totalAmount, ticket.totalPrice, ticket.date, ticket.user)
+
+          const qrCode = {
+            idBill: idBill,
+            totalAmount: ticket.totalAmount, totalPrice: ticket.totalPrice,
+            date: ticket.date, userId: ticket.user
+          }
+
+          await updateQRcode(qrCode, ticket.user)
 
           await Promise.all(ticket.ticketAmounts.map(async (item, index) => {
             if (item > 0) {
@@ -67,6 +72,9 @@ export default class VNpayScreen extends Component {
               await createService(item, index + 1, idBill);
             }
           }));
+
+          this.props.navigation.navigate('TicketsPaidScreen')
+          alert('Giao dịch thành công')
         } else {
           this.props.navigation.goBack()
           alert('Giao dịch thất bại')
@@ -77,8 +85,7 @@ export default class VNpayScreen extends Component {
 
   render() {
     const { paymentResultUrl, ticket } = this.state;
-    console.log(ticket)
-    const url = 'https://fine-cyan-ladybug-tam.cyclic.app/api/payment/create_payment_url/' + ticket.totalPrice
+    const url = 'http://192.168.101.30:3000/api/payment/create_payment_url/' + ticket.totalPrice
 
     return (
       <View style={{ flex: 1 }}>

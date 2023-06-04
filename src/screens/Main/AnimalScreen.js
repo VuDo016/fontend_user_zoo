@@ -1,16 +1,28 @@
-import { Image, Text, View, FlatList, TouchableOpacity } from 'react-native'
+import { Image, Text, View, FlatList, TouchableOpacity, RefreshControl } from 'react-native'
 import React, { Component } from 'react'
 
 import styles from '../../styles/AnimalSttyles';
-import { getAllAnimal } from '../../../api/service/animal'
+import { getAllAnimal, getAnimalBySpecies } from '../../../api/service/animal'
 import Dropdown from '../../components/Dropdown';
+import Comment from '../../components/Comment/Comment';
 
 export default class AnimalScreen extends Component {
   state = {
     animal: [],
     isLoading: true,
-    limit: 10
+    limit: 10,
+    selectedDropdownValue: '',
+    refreshing: false
   };
+
+  refreshData() {
+    this.setState({ refreshing: true });
+
+    // Gọi lại hàm getAllAnimal để lấy dữ liệu sự kiện ban đầu
+    this.getAllAnimal().then(() => {
+      this.setState({ refreshing: false });
+    });
+  }
 
   async getAllAnimal() {
     try {
@@ -26,12 +38,17 @@ export default class AnimalScreen extends Component {
     this.setState({ limit: this.state.limit + 10 })
   }
 
+  setSelectedDropdownValue = async (value) => {
+    this.setState({ selectedDropdownValue: value });
+    this.setState({ animal: await getAnimalBySpecies(value) });
+  }
+
   componentDidMount() {
     this.getAllAnimal();
   }
 
   render() {
-    const { animal, limit } = this.state;
+    const { animal, limit, selectedDropdownValue } = this.state;
     const navigation = this.props.navigation
     const size = Object.keys(animal).length;
     const limitedData = animal.slice(0, limit);
@@ -42,6 +59,12 @@ export default class AnimalScreen extends Component {
         keyExtractor={({ id }, index) => id}
         numColumns={2}
         style={styles.listAllAnimal}
+        refreshControl={
+          <RefreshControl
+            refreshing={this.state.refreshing}
+            onRefresh={() => this.refreshData()}
+          />
+        }
         ListHeaderComponent={
           <>
             <View style={styles.viewTest1}>
@@ -54,7 +77,12 @@ export default class AnimalScreen extends Component {
               <View style={styles.viewRow}>
                 <Text style={styles.textNumber}>{size} Động Vật</Text>
                 <View style={styles.viewSelec}>
-                  <Dropdown size={'100%'} title={'Loại động vật'} />
+                  <Dropdown
+                    size={'100%'}
+                    title={'Loại động vật'}
+                    selectedValue={selectedDropdownValue}
+                    setSelectedValue={this.setSelectedDropdownValue}
+                  />
                 </View>
               </View>
             </View>
@@ -69,6 +97,7 @@ export default class AnimalScreen extends Component {
         ListFooterComponent={
           <>
             <View style={styles.viewFoot}>
+              <Comment navigation={navigation} />
               <Text style={styles.textNumber}>Bạn đã xem {limit < size ? limit : size} trên {size} động vật</Text>
               {
                 limit < size ?

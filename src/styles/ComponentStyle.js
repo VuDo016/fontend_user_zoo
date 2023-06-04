@@ -29,8 +29,8 @@ const styles = StyleSheet.create({
         color: colors.black
     },
     image: {
-        height: '50%',
-        width: '50%',
+        height: screenWidth / 10,
+        width: screenWidth / 10,
         tintColor: colors.text
     },
     buttonBack: {
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
         zIndex: 1,
         top: '5%',
         left: '5%',
-        opacity: 0.4
+        opacity: 0.5
     },
     //////
     container1: {

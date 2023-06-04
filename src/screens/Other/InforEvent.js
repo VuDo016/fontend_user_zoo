@@ -94,7 +94,7 @@ export default class InforEvent extends Component {
               <Image style={styles.icon} source={require('../../../assets/images/price.png')} />
               {
                 parseInt(event.price) === 0 ?
-                  <Text style={styles.priceText}>Miễn phí</Text> : <Text style={styles.priceText}>{event.price} vnđ</Text>
+                  <Text style={styles.priceText}>Miễn phí</Text> : <Text style={styles.priceText}>{event.price}0 vnđ</Text>
               }
             </View>
             <View style={styles.viewDescription}>
