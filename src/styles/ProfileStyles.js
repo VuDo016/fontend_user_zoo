@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
         position: 'absolute',
-        top: '10%',
+        top: screenHeight / 25,
         left: '35%',
         zIndex: 1
     },
@@ -124,6 +124,18 @@ const styles = StyleSheet.create({
         color: colors.text,
         fontSize: 20,
         fontWeight: '600'
+    },
+    viewRank: {
+        flex: 1,
+        borderWidth: 2,
+        borderRadius: 20,
+        paddingHorizontal: '5%',
+        paddingVertical: '2%',
+        justifyContent: 'space-between'
+    },
+    viewRowRank: {
+        flexDirection: 'row',
+        justifyContent: 'space-between'
     }
 })
 

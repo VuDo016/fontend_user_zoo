@@ -81,7 +81,8 @@ export default class ChoiceServiceScreen extends Component {
                 // Lưu ticket cập nhật vào AsyncStorage
                 await AsyncStorage.setItem('ticket', JSON.stringify(ticket));
 
-                navigation.navigate('InfoBill', {data: updatedData})
+                navigation.navigate('LoginScreen', {data: updatedData, newUser: null})
+                alert("Vui lòng đăng nhập để tiếp tục")
             }
         } catch (error) {
             console.log(error);

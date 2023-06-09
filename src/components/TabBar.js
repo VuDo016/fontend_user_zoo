@@ -46,7 +46,7 @@ const Tab = createBottomTabNavigator();
 export default class TabBar extends Component {
   render() {
     const navigation = this.props.navigation
-    
+
     return (
       <Tab.Navigator
         screenOptions={{

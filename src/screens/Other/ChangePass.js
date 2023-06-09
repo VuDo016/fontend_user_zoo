@@ -24,13 +24,13 @@ export default class ChangePass extends Component {
       this.setState({ rePassNew: text })
   }
 
-  async changPassword(idKH, token) {
+  async changPassword(idKH) {
     const pass = this.state.pass
     const newPass = this.state.passNew
     const rePassNew = this.state.rePassNew
 
     if (newPass === rePassNew) {
-      const message = await update_PasswordKH(pass, newPass, token, idKH)
+      const message = await update_PasswordKH(pass, newPass, idKH)
       if (message === "Mật khẩu cũ không chính xác")
         alert(message)
       else if (message === "Cập nhật mật khẩu thành công") {
@@ -50,7 +50,6 @@ export default class ChangePass extends Component {
 
   render() {
     const idKH = this.props.route.params.idKH
-    const token = this.props.route.params.token
     const { pass, passNew, rePassNew } = this.state
 
     return (
@@ -75,7 +74,7 @@ export default class ChangePass extends Component {
             <Text style={styles.text}>Nhập lại mk mới:</Text>
             <TextInput secureTextEntry={true} style={styles.inputText} onChangeText={text => this.setValue(text, 3)} >{rePassNew}</TextInput>
           </View>
-          <TouchableOpacity style={styles.viewBtn} onPress={() => this.changPassword(idKH, token)}>
+          <TouchableOpacity style={styles.viewBtn} onPress={() => this.changPassword(idKH)}>
             <Text style={styles.textBtn}>Đổi mật khẩu</Text>
           </TouchableOpacity>
         </View>

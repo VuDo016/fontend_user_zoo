@@ -3,11 +3,14 @@ import React, { Component } from 'react'
 import styles from '../../styles/BuyTicketStyles';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+import { getAllAccountID } from '../../../api/service/account';
+
 export default class ChoiceServiceScreen extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
+            userDetail: [],
             ticket: {},
             isLoading: true,
         };
@@ -35,21 +38,27 @@ export default class ChoiceServiceScreen extends Component {
 
                 // Lưu ticket cập nhật vào AsyncStorage
                 await AsyncStorage.setItem('ticket', JSON.stringify(ticket));
-                navigation.navigate('LoginScreen', { newUser: null })
-                alert("Vui lòng đăng nhập để thanh toán")
+                navigation.navigate('VNpayScreen')
             }
         } catch (error) {
             console.log(error);
         }
     }
 
-    componentDidMount() {
+    async getDataUser(cartData) {
+        const idUser = await AsyncStorage.getItem('user');
+
+        this.setState({ userDetail: await getAllAccountID(JSON.parse(idUser)) })
+    }
+
+    async componentDidMount() {
+        await this.getDataUser();
         this.loadTicket();
     }
 
     render() {
         const navigation = this.props.navigation;
-        const { ticket, isLoading } = this.state;
+        const { ticket, isLoading, userDetail } = this.state;
         const data = this.props.route.params.data
 
         if (isLoading) {
@@ -132,18 +141,35 @@ export default class ChoiceServiceScreen extends Component {
                                 </View>
                             </View>
                             <View style={styles.section}>
+                                <Text style={styles.title}>Ưu đãi thành viên:</Text>
+                                <View style={styles.serviceList}>
+                                    <View style={styles.service}>
+                                        <Text style={styles.serviceName}>Hạng thành viên</Text>
+                                        <Text style={styles.servicePrice}>{userDetail.rank_name}</Text>
+                                    </View>
+                                    <View style={styles.service}>
+                                        <Text style={styles.serviceName}>Giảm giá</Text>
+                                        <Text style={styles.servicePrice}>{userDetail.discount_percentage} %</Text>
+                                    </View>
+                                    <View style={styles.service}>
+                                        <Text style={styles.serviceName}>Tổng tiền giảm:</Text>
+                                        <Text style={styles.servicePrice}>{((totalPriceService + totalPriceTicket)*(+userDetail.discount_percentage / 100)).toLocaleString()} VND</Text>
+                                    </View>
+                                </View>
+                            </View>
+                            <View style={styles.section}>
                                 <Text style={styles.title}>Phương thức thanh toán:</Text>
                                 <Text style={styles.value}>VNPay</Text>
                             </View>
                             <View style={styles.section}>
-                                <Text style={styles.title}>Tổng hoá đơn: {(totalPriceService + totalPriceTicket).toLocaleString()} VND</Text>
+                                <Text style={styles.title}>Tổng hoá đơn: {((totalPriceService + totalPriceTicket) - (totalPriceService + totalPriceTicket)*(+userDetail.discount_percentage / 100)).toLocaleString()} VND</Text>
                             </View>
                         </View>
                     </ScrollView>
                 </View>
                 <View style={styles.item3}>
                     <TouchableOpacity style={styles.button}
-                        onPress={() => this.handleBill(navigation, totalPriceService + totalPriceTicket, totalAmount)}>
+                        onPress={() => this.handleBill(navigation, (totalPriceService + totalPriceTicket) - (totalPriceService + totalPriceTicket)*(+userDetail.discount_percentage / 100), totalAmount)}>
                         <Text style={styles.textBtn}>Thanh toán</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.button2} onPress={() => navigation.goBack()}>

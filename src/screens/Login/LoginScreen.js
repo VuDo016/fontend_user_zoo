@@ -9,8 +9,8 @@ import { handle_SignIn_SignUp_KH } from '../../../api/method/post';
 
 export default class LoginScreen extends Component {
     state = {
-        email: 'vudo456@gmail.com',
-        password: '12345678',
+        email: 'rio@gmail.com',
+        password: 'rio12345678',
         rememberMe: false
     };
 
@@ -34,8 +34,9 @@ export default class LoginScreen extends Component {
                 AsyncStorage.setItem('user', JSON.stringify(data[0].userId))
                 const previousScreen = navigation.getState().routes[navigation.getState().routes.length - 2]?.name;
                 // Kiểm tra tên màn hình trước đó và thực hiện xử lý tương ứng
-                if (previousScreen === 'InfoBill') {
-                    navigation.navigate('VNpayScreen')
+                if (previousScreen === 'ChoiceVehicalScreen') {
+                    const updatedData = this.props.route.params.data
+                    navigation.navigate('InfoBill', {data: updatedData})
                 } else if (previousScreen === 'HomeScreen') {
                     navigation.navigate('TabBar')
                 } else if (previousScreen === 'RegisterScreen') {

@@ -5,6 +5,7 @@ import WebView from 'react-native-webview';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { createBill, createService, createTicket, updateQRcode } from '../../../api/service/ticket';
+import { updateRank } from '../../../api/service/account';
 
 export default class VNpayScreen extends Component {
   constructor(props) {
@@ -73,6 +74,8 @@ export default class VNpayScreen extends Component {
             }
           }));
 
+          await updateRank(ticket.user)
+
           this.props.navigation.navigate('TicketsPaidScreen')
           alert('Giao dịch thành công')
         } else {
@@ -85,7 +88,7 @@ export default class VNpayScreen extends Component {
 
   render() {
     const { paymentResultUrl, ticket } = this.state;
-    const url = 'http://192.168.101.30:3000/api/payment/create_payment_url/' + ticket.totalPrice
+    const url = 'http://192.168.1.154:3000/api/payment/create_payment_url/' + ticket.totalPrice
 
     return (
       <View style={{ flex: 1 }}>

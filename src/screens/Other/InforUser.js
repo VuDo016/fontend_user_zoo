@@ -22,7 +22,6 @@ export default class InforUser extends Component {
     }
 
     render() {
-        const token = this.props.route.params.token
         const { data } = this.state
 
         const formatDate = (date) => {
@@ -40,7 +39,7 @@ export default class InforUser extends Component {
                         />
                         <Text style={styles.textTitle}>Hồ sơ của tôi</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.btnEdit} onPress={() => this.props.navigation.navigate('EditUser', { data: data, token: token })}>
+                    <TouchableOpacity style={styles.btnEdit} onPress={() => this.props.navigation.navigate('EditUser', { data: data})}>
                         <Image
                             style={styles.iconEdit}
                             source={require('../../../assets/images/iconProfile/editProfile.png')}
@@ -88,7 +87,7 @@ export default class InforUser extends Component {
                         <Text style={styles.textTitleInfo}>Email</Text>
                         <Text style={styles.textClick}>{data.email}  </Text>
                     </View>
-                    <TouchableOpacity style={styles.viewChangePass} onPress={() => this.props.navigation.navigate('ChangePass', { idKH: data.id, token: token })}>
+                    <TouchableOpacity style={styles.viewChangePass} onPress={() => this.props.navigation.navigate('ChangePass', { idKH: data.id})}>
                         <Text style={styles.textChangePass}>Đổi mật khẩu</Text>
                         <Text style={styles.textChangePass}>➤</Text>
                     </TouchableOpacity>

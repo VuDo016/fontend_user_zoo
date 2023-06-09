@@ -24,7 +24,6 @@ export default class HisTicket extends Component {
   }
 
   render() {
-    const token = this.props.route.params.token
     const { data, listTicket } = this.state
     const navigation = this.props.navigation;
 

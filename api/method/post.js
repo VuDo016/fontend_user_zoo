@@ -1,4 +1,11 @@
 import { https } from "../http/http";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+const getToken = async () => {
+    const token = await AsyncStorage.getItem('token');
+    const cartData = JSON.parse(token);
+    return cartData.accessToken
+}
 
 export const handle_SignIn_SignUp_KH = async (email, password, name, option) => {
     const itemUser = []
@@ -54,6 +61,18 @@ export const handle_SignIn_SignUp_KH = async (email, password, name, option) => 
 }
 
 export const post = async (bodyData, url, data) => {
+    console.log(await getToken())
+    const response = await fetch(https + url,
+        {
+            method: "POST",
+            headers: { 'Content-Type': 'application/json; charset=utf-8', 'Authorization': await getToken() },
+            body: JSON.stringify(bodyData),
+        })
+    const resJson = await response.json();
+    return resJson[data]
+}
+
+export const post1 = async (bodyData, url) => {
     const response = await fetch(https + url,
         {
             method: "POST",
@@ -61,7 +80,7 @@ export const post = async (bodyData, url, data) => {
             body: JSON.stringify(bodyData),
         })
     const resJson = await response.json();
-    return resJson[data]
+    return resJson
 }
 
 export const uploadImage = async (imageUris, url, type, value) => {
@@ -86,7 +105,7 @@ export const uploadImage = async (imageUris, url, type, value) => {
             method: 'POST',
             body: formData,
             headers: {
-                'Content-Type': 'multipart/form-data',
+                'Content-Type': 'multipart/form-data', 'Authorization': await getToken()
             },
         });
 

@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
     },
     viewSelec: {
         width: '50%',
-        height: '100%',
+        height: '110%',
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: colors.greenLight

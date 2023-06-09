@@ -43,7 +43,7 @@ export default class EditUser extends Component {
             this.setState({ anhDaiDien: text })
     }
 
-    UpdateKH(idKH, token) {
+    UpdateKH(idKH) {
         const data = this.props.route.params.data
         if (this.state.ho !== '')
             data.first_name = this.state.ho
@@ -61,7 +61,7 @@ export default class EditUser extends Component {
         data.gender = this.state.gender ? 1 : 0
         data.birth_date = this.state.date
 
-        update_Khachhang(data, idKH, token)
+        update_Khachhang(data, idKH)
     }
 
     setDate = (event, date) => {
@@ -90,7 +90,6 @@ export default class EditUser extends Component {
 
     render() {
         const data = this.props.route.params.data
-        const token = this.props.route.params.token
         const { show, date, mode, gender } = this.state
 
         const formatDate = (date) => {
@@ -160,7 +159,7 @@ export default class EditUser extends Component {
                     </View>
                 </View>
                 <View style={styles.container2}>
-                    <TouchableOpacity style={styles.btnSubmit} onPress={() => this.UpdateKH(data.id, token)}>
+                    <TouchableOpacity style={styles.btnSubmit} onPress={() => this.UpdateKH(data.id)}>
                         <Text style={styles.textBtn}>Cập Nhật</Text>
                     </TouchableOpacity>
                 </View>

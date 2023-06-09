@@ -18,7 +18,9 @@ const styles = (focused) => StyleSheet.create({
         width: screenWidth / 5,
         marginBottom: '25%',
         backgroundColor: colors.mainHome,
-        borderRadius: 200
+        borderRadius: 200,
+        borderWidth: 5,
+        borderColor: colors.greenLight
     },
     icon: {
         width: 30,

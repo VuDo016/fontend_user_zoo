@@ -1,11 +1,17 @@
 import { https } from "../http/http";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export const update_Khachhang = async (body, idKH, token) => {
-    console.log(body, idKH)
+const getToken = async () => {
+    const token = await AsyncStorage.getItem('token');
+    const cartData = JSON.parse(token);
+    return cartData.accessToken
+}
+
+export const update_Khachhang = async (body, idKH) => {
     const response = await fetch(https + 'account',
         {
             method: "PUT",
-            headers: { 'Content-Type': 'application/json; charset=utf-8'},
+            headers: { 'Content-Type': 'application/json; charset=utf-8', 'Authorization': await getToken()},
             body: JSON.stringify({
                 id: idKH,
                 first_name: body.first_name,
@@ -26,11 +32,11 @@ export const update_Khachhang = async (body, idKH, token) => {
         alert('Cập nhật thất bại !!!')   
 }
 
-export const update_PasswordKH = async (pass, newPass, token, idKH) => {
+export const update_PasswordKH = async (pass, newPass, idKH) => {
     const response = await fetch(https + 'account/updatePass',
         {
             method: "PUT",
-            headers: { 'Content-Type': 'application/json; charset=utf-8'},
+            headers: { 'Content-Type': 'application/json; charset=utf-8', 'Authorization': await getToken()},
             body: JSON.stringify({
                 idKH: idKH,
                 newPass: newPass,
@@ -40,4 +46,15 @@ export const update_PasswordKH = async (pass, newPass, token, idKH) => {
     const resJson = await response.json();
 
     return resJson.message
+}
+
+export const updateByValue = async (url, value) => {
+    const response = await fetch(https + url + '/' + value,
+        {
+            method: "PUT",
+            headers: { 'Content-Type': 'application/json; charset=utf-8', 'Authorization': await getToken()}
+        })
+    const resJson = await response.json();
+
+    return resJson
 }

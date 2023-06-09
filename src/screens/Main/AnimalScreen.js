@@ -27,6 +27,7 @@ export default class AnimalScreen extends Component {
   async getAllAnimal() {
     try {
       this.setState({ animal: await getAllAnimal() })
+      this.setState({ selectedDropdownValue: '' });
     } catch (error) {
       console.log(error);
     } finally {

@@ -16,8 +16,7 @@ export default class EventScreen extends Component {
       event: [],
       isLoading: true,
       limit: 5,
-      refreshing: false,
-      token: ''
+      refreshing: false
     };
   }
 
@@ -31,10 +30,8 @@ export default class EventScreen extends Component {
   }
 
   async getAllEvent() {
-    const token = this.state.token
-
     try {
-      this.setState({ event: await getAllEvent(token) })
+      this.setState({ event: await getAllEvent() })
     } catch (error) {
       console.log(error);
     } finally {
@@ -43,9 +40,6 @@ export default class EventScreen extends Component {
   }
 
   async componentDidMount() {
-    const token = await AsyncStorage.getItem('token');
-    const cartData = JSON.parse(token);
-    this.setState({ token: cartData.accessToken });
     this.getAllEvent();
   }
 
@@ -68,9 +62,8 @@ export default class EventScreen extends Component {
   }
 
   handleDateChange = async (date) => {
-    const token = this.state.token
     // Xử lý sự kiện onChange ở đây
-    this.setState({ event: await getEventByDate(date, token) })
+    this.setState({ event: await getEventByDate(date) })
   }
 
   render() {
