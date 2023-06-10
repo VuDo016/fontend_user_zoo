@@ -29,9 +29,18 @@ const styles = StyleSheet.create({
         color: colors.black
     },
     image: {
-        height: screenWidth / 10,
-        width: screenWidth / 10,
+        height: screenWidth / 15,
+        width: screenWidth / 15,
         tintColor: colors.text
+    },
+    viewButtonHead: {
+        position: 'absolute',
+        zIndex: 1,
+        top: '5%',
+        left: '5%',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        width: '90%'
     },
     buttonBack: {
         height: screenHeight / 15,
@@ -40,10 +49,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 100,
-        position: 'absolute',
-        zIndex: 1,
-        top: '5%',
-        left: '5%',
         opacity: 0.5
     },
     //////

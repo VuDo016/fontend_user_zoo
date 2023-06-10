@@ -108,11 +108,11 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     viewFoot: {
-        height: screenHeight / 6,
+        height: '20%',
         justifyContent: 'center',
         alignItems: 'center',
         justifyContent: 'space-between',
-        paddingVertical: '5%'
+        position: 'absolute'
     },
     buttonViewmore: {
         justifyContent: 'center',
@@ -166,8 +166,7 @@ const styles = StyleSheet.create({
     textTitle1: {
         fontSize: 35,
         color: colors.black,
-        fontFamily: 'MiraikatoScriptPERSONALUSE-Bold',
-        marginVertical: '2.5%'
+        fontFamily: 'MiraikatoScriptPERSONALUSE-Bold'
     },
     textInfo1: {
         fontSize: 25,
@@ -377,7 +376,25 @@ const styles = StyleSheet.create({
         position: 'absolute',
         left: '110%',
         bottom: 0
-    }
+    },
+    imageShare: {
+        height: screenWidth / 15,
+        width: screenWidth / 15,
+        tintColor: colors.text
+    },
+    buttonShare: {
+        height: screenHeight / 15,
+        width: screenHeight / 15,
+        backgroundColor: colors.black,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 100,
+        position: 'absolute',
+        zIndex: 1,
+        top: '5%',
+        left: '5%',
+        opacity: 0.5
+    },
 });
 
 export default styles;

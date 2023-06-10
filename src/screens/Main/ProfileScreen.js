@@ -94,7 +94,7 @@ export default class ProfileScreen extends Component {
                 <View style={styles.viewAvatar}>
                   {userDetail.avatar_url ? (
                     <Image style={styles.imageAvata} source={{ uri: userDetail.avatar_url }} />
-                  ) : null}
+                  ) : <Image style={styles.imageAvata} source={require('../../../assets/images/iconProfile/avatar.png')} />}
                 </View>
                 <Text style={styles.text}>{userDetail.name} {userDetail.first_name}</Text>
               </View>

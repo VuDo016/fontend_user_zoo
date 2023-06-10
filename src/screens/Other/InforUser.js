@@ -39,7 +39,7 @@ export default class InforUser extends Component {
                         />
                         <Text style={styles.textTitle}>Hồ sơ của tôi</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.btnEdit} onPress={() => this.props.navigation.navigate('EditUser', { data: data})}>
+                    <TouchableOpacity style={styles.btnEdit} onPress={() => this.props.navigation.navigate('EditUser', { data: data })}>
                         <Image
                             style={styles.iconEdit}
                             source={require('../../../assets/images/iconProfile/editProfile.png')}
@@ -50,9 +50,12 @@ export default class InforUser extends Component {
                     <ImageBackground style={styles.imageCover} source={require('../../../assets/images/background.png')}>
                         {data.avatar_url ? (<Image
                             style={styles.imageAvatar}
-                            source={data.anhDaiDien === null ? (data.gioiTinh ? require('../../../assets/images/background.png') : require('../../../assets/images/background.png')) : { uri: data.avatar_url }}
+                            source={{ uri: data.avatar_url }}
                         />
-                        ) : null}
+                        ) : <Image
+                            style={styles.imageAvatar}
+                            source={require('../../../assets/images/iconProfile/avatar.png')}
+                        />}
                     </ImageBackground>
                     <View style={styles.viewChoose}>
                         <Text style={styles.textTitleInfo}>Họ</Text>
@@ -65,7 +68,7 @@ export default class InforUser extends Component {
                     <View style={styles.viewChoose1}>
                         <Text style={styles.textTitleInfo}>Giới tính</Text>
                         {
-                            data.gender !== null ? ( data.gender ? <Text style={styles.textClick}>Nam  </Text> : <Text style={styles.textClick}>Nữ  </Text> ) : <Text style={styles.textClick}> </Text>
+                            data.gender !== null ? (data.gender ? <Text style={styles.textClick}>Nam  </Text> : <Text style={styles.textClick}>Nữ  </Text>) : <Text style={styles.textClick}> </Text>
                         }
 
                     </View>
@@ -87,7 +90,7 @@ export default class InforUser extends Component {
                         <Text style={styles.textTitleInfo}>Email</Text>
                         <Text style={styles.textClick}>{data.email}  </Text>
                     </View>
-                    <TouchableOpacity style={styles.viewChangePass} onPress={() => this.props.navigation.navigate('ChangePass', { idKH: data.id})}>
+                    <TouchableOpacity style={styles.viewChangePass} onPress={() => this.props.navigation.navigate('ChangePass', { idKH: data.id })}>
                         <Text style={styles.textChangePass}>Đổi mật khẩu</Text>
                         <Text style={styles.textChangePass}>➤</Text>
                     </TouchableOpacity>

@@ -68,6 +68,8 @@ class InforAnimal extends Component {
       }
     }
 
+    const uniqueUrls = [...new Set(animal1.images)];
+
     return (
       <FlatList
         data={info}
@@ -87,10 +89,12 @@ class InforAnimal extends Component {
                 nextButton={<Image style={styles.iconArrow} source={require('../../../assets/images/arrow/right.png')} />}
                 prevButton={<Image style={styles.iconArrow} source={require('../../../assets/images/arrow/left.png')} />}
               >
-                {animal1.images.map((image, index) => (
+                {uniqueUrls.map((image, index) => (
                   <Image key={index} style={styles.image1} source={{ uri: image }} />
                 ))}
               </Swiper>
+              <View style={styles.viewFoot}>               
+              </View>
               <Text style={styles.textTitle1}>Thông tin nhanh</Text>
             </View>
 
@@ -111,7 +115,7 @@ class InforAnimal extends Component {
                 <Image style={styles.imgiconIUCN} source={require('../../../assets/images/iconAnimal/iucn.png')} />
                 <Text style={styles.textTitle2}>{animal1.sign}</Text>
               </View>
-              <View style={styles.viewIUCNitem}> 
+              <View style={styles.viewIUCNitem}>
                 <Text style={styles.textInfo1}>{animal1.title}</Text>
                 <Text style={styles.textInfo2}>{animal1.detail}</Text>
               </View>
@@ -140,11 +144,6 @@ class InforAnimal extends Component {
                 :
                 <View></View>
             }
-            <View style={styles.viewFoot}>
-              <TouchableOpacity style={styles.buttonViewmore}>
-                <Text style={styles.textName}>Chia sẻ</Text>
-              </TouchableOpacity>
-            </View>
             <View style={styles.animalListContainer}>
               <View style={styles.viewTitle}>
                 <Text style={styles.textTitle2}>Bạn cũng có thể thích?</Text>
