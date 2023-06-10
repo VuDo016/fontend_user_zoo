@@ -43,6 +43,8 @@ export default class VNpayScreen extends Component {
   }
 
   async componentDidUpdate(prevProps, prevState) {
+    const navigation = this.props.navigation
+
     if (prevState.paymentResultUrl !== this.state.paymentResultUrl) {
       const { paymentResultUrl } = this.state;
       if (paymentResultUrl) {
@@ -50,36 +52,44 @@ export default class VNpayScreen extends Component {
         const { vnp_ResponseCode, vnp_TransactionStatus } = parsedUrl.query;
 
         if (vnp_ResponseCode === '00' && vnp_TransactionStatus === '00') {
-          const ticket = this.state.ticket
+          const previousScreen = navigation.getState().routes[navigation.getState().routes.length - 2]?.name;
+          if (previousScreen === 'Donation') {
+            alert('Cảm ơn bạn đã ủng hộ !!!')
+            this.props.navigation.goBack()
+          }
+          else {
+            const ticket = this.state.ticket
 
-          const idBill = await createBill(ticket.totalAmount, ticket.totalPrice, ticket.date, ticket.user)
+            const idBill = await createBill(ticket.totalAmount, ticket.totalPrice, ticket.date, ticket.user)
 
-          const qrCode = {
-            idBill: idBill,
-            totalAmount: ticket.totalAmount, totalPrice: ticket.totalPrice,
-            date: ticket.date, userId: ticket.user
+            const qrCode = {
+              idBill: idBill,
+              totalAmount: ticket.totalAmount, totalPrice: ticket.totalPrice,
+              date: ticket.date, userId: ticket.user
+            }
+
+            await updateQRcode(qrCode, ticket.user)
+
+            await Promise.all(ticket.ticketAmounts.map(async (item, index) => {
+              if (item > 0) {
+                await createTicket(item, index + 1, idBill);
+              }
+            }));
+
+            await Promise.all(ticket.serviceAmounts.map(async (item, index) => {
+              if (item > 0) {
+                await createService(item, index + 1, idBill);
+              }
+            }));
+
+            await updateRank(ticket.user)
+
+            navigation.navigate('TicketsPaidScreen')
+            alert('Giao dịch thành công')
           }
 
-          await updateQRcode(qrCode, ticket.user)
-
-          await Promise.all(ticket.ticketAmounts.map(async (item, index) => {
-            if (item > 0) {
-              await createTicket(item, index + 1, idBill);
-            }
-          }));
-
-          await Promise.all(ticket.serviceAmounts.map(async (item, index) => {
-            if (item > 0) {
-              await createService(item, index + 1, idBill);
-            }
-          }));
-
-          await updateRank(ticket.user)
-
-          this.props.navigation.navigate('TicketsPaidScreen')
-          alert('Giao dịch thành công')
         } else {
-          this.props.navigation.goBack()
+          navigation.goBack()
           alert('Giao dịch thất bại')
         }
       }

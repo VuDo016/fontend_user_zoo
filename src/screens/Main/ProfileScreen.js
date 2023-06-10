@@ -58,7 +58,7 @@ export default class ProfileScreen extends Component {
 
     const info = [
       { id: '1', name: 'Vé của tôi', title: 'Xem lịch sử mua vé của bạn', icon: require('../../../assets/images/iconProfile/ticket.png'), screem: 'HisTicket' },
-      { id: '2', name: 'Quyên góp', title: 'Dành tình yêu cho động vật - Ủng hộ Sở thú ngay!"', icon: require('../../../assets/images/iconProfile/donation.png'), screem: 'InforUser' },
+      { id: '2', name: 'Quyên góp', title: 'Dành tình yêu cho động vật - Ủng hộ Sở thú ngay!"', icon: require('../../../assets/images/iconProfile/donation.png'), screem: 'Donation' },
       { id: '3', name: 'Sản phẩm của tôi', title: 'Xem lịch sử mua hàng của bạn', icon: require('../../../assets/images/iconProfile/cart.png'), screem: 'InforUser' },
       { id: '4', name: 'Danh sách yêu thích', title: 'TÌm kiếm danh sách động vật hay sự kiện yêu thích', icon: require('../../../assets/images/iconProfile/like.png'), screem: 'InforUser' },
       { id: '5', name: 'Thông tin', title: 'Xem thông tin cá nhân của bạn', icon: require('../../../assets/images/iconProfile/info.png'), screem: 'InforUser' },
