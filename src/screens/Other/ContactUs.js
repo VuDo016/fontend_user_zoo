@@ -63,9 +63,9 @@ export default class ContactUs extends Component {
                             onChangeText={text => this.setValueMessage(text)}
                             value={message} />
                     </View>
-                    <Button title="Gửi SMS" onPress={() => Linking.openURL(`mailto:support@me.com?subject=${subject}&body=${message}`)} color={colors.mainHome} />
+                    <Button title="Gửi SMS" onPress={() => Linking.openURL(`sms:${'+65 6269 3411'}${'?'}body=${subject + ':\n' + message}`)} color={colors.mainHome} />
                     <View style={{ height: 10 }}></View>
-                    <Button title="Gửi Mail" onPress={() => Linking.openURL(`sms:${'+65 6269 3411'}${'?'}body=${subject + ':\n' + message}`)} />
+                    <Button title="Gửi Mail" onPress={() => Linking.openURL(`mailto:support@me.com?subject=${subject}&body=${message}`)} />
                 </View>
             </ScrollView>
         )

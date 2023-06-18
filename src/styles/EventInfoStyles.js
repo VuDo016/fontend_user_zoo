@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
         backgroundColor: colors.text
     },
     container: {
-        height: screenHeight * 1.45,
+        height: 'auto',
         backgroundColor: '#fff'
     },
     image: {
@@ -26,23 +26,23 @@ const styles = StyleSheet.create({
         backgroundColor: colors.dark2
     },
     viewName: {
-        height: screenHeight / 3.5,
+        height: 'auto',
         width: '80%',
-        justifyContent: 'space-between',
         zIndex: 1,
         position: 'absolute',
-        top: '12%',
+        top: screenHeight / 4.5,
         left: '5%'
     },
     name: {
         fontSize: 40,
         fontWeight: 'bold',
-        color: colors.text
+        color: colors.text,
+        marginBottom: screenHeight / 30
     },
     buttonViewmore: {
         justifyContent: 'center',
         alignItems: 'center',
-        height: '25%',
+        height: screenHeight / 15,
         width: '50%',
         backgroundColor: colors.greenLight,
         borderRadius: 20
@@ -66,11 +66,11 @@ const styles = StyleSheet.create({
     },
     viewRow2: {
         flexDirection: 'row',
-        height: '15%',
+        height: 'auto',
         width: '100%',
         justifyContent: 'space-between',
         alignItems: "center",
-        marginBottom: '10%'
+        marginBottom: '5%'
     },
     viewRow1: {
         flexDirection: 'row',
@@ -116,11 +116,16 @@ const styles = StyleSheet.create({
         color: colors.mainDark
     },
     viewDescription: {
-        height: screenHeight / 4,
+        height: 'auto',
         justifyContent: 'space-between',
         width: '100%',
-        marginVertical: '2%',
-        paddingVertical: '5%'
+        paddingVertical: '3%'
+    },
+    viewDescription1: {
+        height: 'auto',
+        width: '100%',
+        paddingHorizontal: '5%',
+        paddingVertical: '7%'
     },
     location: {
         fontSize: 22,
@@ -132,7 +137,7 @@ const styles = StyleSheet.create({
         color: colors.mainHome
     },
     imgLocation: {
-        height: '80%',
+        height: screenHeight / 5,
         width: '100%',
         borderRadius: 20
     },

@@ -18,6 +18,16 @@ export const getAll = async (url, data) => {
     return resJson[data]
 }
 
+export const getAllnottoken = async (url, data) => {
+    
+    const response = await fetch(https + url,
+        {
+            method: "GET"
+        });
+    const resJson = await response.json();
+    return resJson[data]
+}
+
 export const getByValue1 = async (url, data, value) => {
     const response = await fetch(https + url + '/' + value,
     {

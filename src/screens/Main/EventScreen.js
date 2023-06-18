@@ -6,7 +6,6 @@ import styles from '../../styles/AnimalSttyles';
 import Dropdown from '../../components/Dropdown';
 import DateChoice from '../../components/DateChoice';
 import { getAllEvent, getEventByDate } from '../../../api/service/event';
-import Comment from '../../components/Comment/Comment';
 
 export default class EventScreen extends Component {
   constructor(props) {
@@ -115,7 +114,6 @@ export default class EventScreen extends Component {
         ListFooterComponent={
           <>
             <View style={styles.viewFoot}>
-              <Comment navigation={navigation} />
               {
                 limit < (size - 1) ?
                   <TouchableOpacity style={styles.buttonViewmore} onPress={() => this.setLimit(size)}>

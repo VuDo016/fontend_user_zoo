@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     viewButtonHead: {
         position: 'absolute',
         zIndex: 1,
-        top: '5%',
+        top: screenHeight / 20,
         left: '5%',
         flexDirection: 'row',
         justifyContent: 'space-between',

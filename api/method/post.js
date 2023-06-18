@@ -61,7 +61,6 @@ export const handle_SignIn_SignUp_KH = async (email, password, name, option) => 
 }
 
 export const post = async (bodyData, url, data) => {
-    console.log(await getToken())
     const response = await fetch(https + url,
         {
             method: "POST",
@@ -70,6 +69,15 @@ export const post = async (bodyData, url, data) => {
         })
     const resJson = await response.json();
     return resJson[data]
+}
+
+export const postnotData = async (bodyData, url) => {
+    await fetch(https + url,
+        {
+            method: "POST",
+            headers: { 'Content-Type': 'application/json; charset=utf-8', 'Authorization': await getToken() },
+            body: JSON.stringify(bodyData),
+        })
 }
 
 export const post1 = async (bodyData, url) => {
@@ -98,8 +106,6 @@ export const uploadImage = async (imageUris, url, type, value) => {
                 name: `image_${index}.${extension}`
             });
         });
-
-        console.log(formData["_parts"][0][1]);
 
         const response = await fetch(apiUrl, {
             method: 'POST',

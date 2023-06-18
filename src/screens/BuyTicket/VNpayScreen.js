@@ -49,8 +49,7 @@ export default class VNpayScreen extends Component {
       const { paymentResultUrl } = this.state;
       if (paymentResultUrl) {
         const parsedUrl = urlParse(paymentResultUrl, true);
-        const { vnp_ResponseCode, vnp_TransactionStatus } = parsedUrl.query;
-
+        const { vnp_ResponseCode, vnp_TransactionStatus, vnp_TxnRef } = parsedUrl.query;
         if (vnp_ResponseCode === '00' && vnp_TransactionStatus === '00') {
           const previousScreen = navigation.getState().routes[navigation.getState().routes.length - 2]?.name;
           if (previousScreen === 'Donation') {
@@ -60,7 +59,7 @@ export default class VNpayScreen extends Component {
           else {
             const ticket = this.state.ticket
 
-            const idBill = await createBill(ticket.totalAmount, ticket.totalPrice, ticket.date, ticket.user)
+            const idBill = await createBill(ticket.totalAmount, ticket.totalPrice, ticket.date, ticket.user, vnp_TxnRef)
 
             const qrCode = {
               idBill: idBill,
@@ -87,7 +86,6 @@ export default class VNpayScreen extends Component {
             navigation.navigate('TicketsPaidScreen')
             alert('Giao dịch thành công')
           }
-
         } else {
           navigation.goBack()
           alert('Giao dịch thất bại')

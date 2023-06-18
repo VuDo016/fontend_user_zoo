@@ -1,6 +1,9 @@
 import { StyleSheet } from "react-native"
+import { Dimensions } from 'react-native';
 
-import colors from "../../assets/colors/colors"
+import colors from "../../assets/colors/colors";
+const screenHeight = Dimensions.get('screen').height;
+const screenWidth = Dimensions.get('screen').width;
 
 //////Rating
 const styles = StyleSheet.create({
@@ -19,7 +22,7 @@ const styles = StyleSheet.create({
     },
     ////////Comment
     info: {
-        height: 550,
+        height: 'auto',
         width: '100%',
         backgroundColor: colors.text
     },
@@ -104,6 +107,12 @@ const styles = StyleSheet.create({
         marginVertical: 5
     },
     ViewLoading: {
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    viewNULL: {
+        height: screenHeight / 5,
+        backgroundColor: colors.mainLight3,
         justifyContent: 'center',
         alignItems: 'center'
     },

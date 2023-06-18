@@ -6,6 +6,7 @@ import styles from '../../styles/AnimalSttyles';
 import { getAllAnimal } from '../../../api/service/animal'
 import colors from '../../../assets/colors/colors';
 import ButtonBack from '../../components/ButtonBack';
+import Comment from '../../components/Comment/Comment';
 
 class InforAnimal extends Component {
   state = {
@@ -93,8 +94,6 @@ class InforAnimal extends Component {
                   <Image key={index} style={styles.image1} source={{ uri: image }} />
                 ))}
               </Swiper>
-              <View style={styles.viewFoot}>               
-              </View>
               <Text style={styles.textTitle1}>Thông tin nhanh</Text>
             </View>
 
@@ -144,6 +143,8 @@ class InforAnimal extends Component {
                 :
                 <View></View>
             }
+            <Text style={styles.textComment1}>Bình luận từ khách hàng:</Text>
+            <Comment navigation={navigation} choice={false} id={animal1.id} />
             <View style={styles.animalListContainer}>
               <View style={styles.viewTitle}>
                 <Text style={styles.textTitle2}>Bạn cũng có thể thích?</Text>

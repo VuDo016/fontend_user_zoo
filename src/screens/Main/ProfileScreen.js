@@ -8,7 +8,7 @@ const screenWidth = Dimensions.get('screen').width;
 
 import styles from '../../styles/ProfileStyles';
 import colors from '../../../assets/colors/colors';
-import { getAllAccountID } from '../../../api/service/account'
+import { getAllAccountID, logOut } from '../../../api/service/account'
 import ProgressBar from '../../components/ProgressBar.';
 
 export default class ProfileScreen extends Component {
@@ -21,7 +21,7 @@ export default class ProfileScreen extends Component {
     };
   }
 
-  async getDataUser(cartData) {
+  async getDataUser() {
     const idUser = await AsyncStorage.getItem('user');
 
     this.setState({ userDetail: await getAllAccountID(JSON.parse(idUser)) })
@@ -37,6 +37,18 @@ export default class ProfileScreen extends Component {
       duration: 300,
       useNativeDriver: false,
     }).start();
+  };
+
+  logout = async () => {
+    try {
+      await logOut();
+      await AsyncStorage.removeItem('token');   
+      console.log('Đã xóa token khỏi AsyncStorage.');
+      this.props.navigation.navigate('HomeScreen')
+      // Thực hiện các thao tác khác sau khi đăng xuất thành công
+    } catch (error) {
+      console.log('Lỗi khi xóa token từ AsyncStorage:', error);
+    }
   };
 
   componentDidMount() {
@@ -90,6 +102,9 @@ export default class ProfileScreen extends Component {
         ListHeaderComponent={
           <>
             <View style={styles.container}>
+              <TouchableOpacity style={styles.btnLogout} onPress={this.logout}>
+                <Image style={styles.imgLogout} source={require('../../../assets/images/iconProfile/logout.png')} />   
+              </TouchableOpacity>
               <View style={styles.header}>
                 <View style={styles.viewAvatar}>
                   {userDetail.avatar_url ? (

@@ -1,5 +1,6 @@
-import { Text, View, TouchableOpacity, Image, ImageBackground } from 'react-native'
+import { Text, View, TouchableOpacity, Image, ImageBackground, ScrollView } from 'react-native'
 import React, { Component } from 'react'
+import { LogBox } from 'react-native';
 
 import styles from '../../styles/InforUserStyle'
 
@@ -18,6 +19,9 @@ export default class InforUser extends Component {
     componentDidMount() {
         this.props.navigation.addListener('focus', () => {
             this.refreshData()
+            LogBox.ignoreLogs([
+                'Non-serializable values were found in the navigation state',
+            ]);
         });
     }
 
@@ -46,55 +50,57 @@ export default class InforUser extends Component {
                         />
                     </TouchableOpacity>
                 </View>
-                <View style={styles.info}>
-                    <ImageBackground style={styles.imageCover} source={require('../../../assets/images/background.png')}>
-                        {data.avatar_url ? (<Image
-                            style={styles.imageAvatar}
-                            source={{ uri: data.avatar_url }}
-                        />
-                        ) : <Image
-                            style={styles.imageAvatar}
-                            source={require('../../../assets/images/iconProfile/avatar.png')}
-                        />}
-                    </ImageBackground>
-                    <View style={styles.viewChoose}>
-                        <Text style={styles.textTitleInfo}>Họ</Text>
-                        <Text style={styles.textClick}>{data.first_name}  </Text>
-                    </View>
-                    <View style={styles.viewChoose}>
-                        <Text style={styles.textTitleInfo}>Tên</Text>
-                        <Text style={styles.textClick}>{data.name}  </Text>
-                    </View>
-                    <View style={styles.viewChoose1}>
-                        <Text style={styles.textTitleInfo}>Giới tính</Text>
-                        {
-                            data.gender !== null ? (data.gender ? <Text style={styles.textClick}>Nam  </Text> : <Text style={styles.textClick}>Nữ  </Text>) : <Text style={styles.textClick}> </Text>
-                        }
+                <ScrollView>
+                    <View style={styles.info}>
+                        <ImageBackground style={styles.imageCover} source={require('../../../assets/images/background.png')}>
+                            {data.avatar_url ? (<Image
+                                style={styles.imageAvatar}
+                                source={{ uri: data.avatar_url }}
+                            />
+                            ) : <Image
+                                style={styles.imageAvatar}
+                                source={require('../../../assets/images/iconProfile/avatar.png')}
+                            />}
+                        </ImageBackground>
+                        <View style={styles.viewChoose}>
+                            <Text style={styles.textTitleInfo}>Họ</Text>
+                            <Text style={styles.textClick}>{data.first_name}  </Text>
+                        </View>
+                        <View style={styles.viewChoose}>
+                            <Text style={styles.textTitleInfo}>Tên</Text>
+                            <Text style={styles.textClick}>{data.name}  </Text>
+                        </View>
+                        <View style={styles.viewChoose1}>
+                            <Text style={styles.textTitleInfo}>Giới tính</Text>
+                            {
+                                data.gender !== null ? (data.gender ? <Text style={styles.textClick}>Nam  </Text> : <Text style={styles.textClick}>Nữ  </Text>) : <Text style={styles.textClick}> </Text>
+                            }
 
+                        </View>
+                        <View style={styles.viewChoose}>
+                            <Text style={styles.textTitleInfo}>Ngày sinh</Text>
+                            {
+                                data.birth_date !== null ? <Text style={styles.textClick}>{formatDate(new Date(data.birth_date))}  </Text> : <Text style={styles.textClick}> </Text>
+                            }
+                        </View>
+                        <View style={styles.viewChoose}>
+                            <Text style={styles.textTitleInfo}>Địa chỉ</Text>
+                            <Text style={styles.textClick}>{data.address}  </Text>
+                        </View>
+                        <View style={styles.viewChoose1}>
+                            <Text style={styles.textTitleInfo}>Số điện thoại</Text>
+                            <Text style={styles.textClick}>{data.phone}  </Text>
+                        </View>
+                        <View style={styles.viewChoose}>
+                            <Text style={styles.textTitleInfo}>Email</Text>
+                            <Text style={styles.textClick}>{data.email}  </Text>
+                        </View>
+                        <TouchableOpacity style={styles.viewChangePass} onPress={() => this.props.navigation.navigate('ChangePass', { idKH: data.id })}>
+                            <Text style={styles.textChangePass}>Đổi mật khẩu</Text>
+                            <Text style={styles.textChangePass}>➤</Text>
+                        </TouchableOpacity>
                     </View>
-                    <View style={styles.viewChoose}>
-                        <Text style={styles.textTitleInfo}>Ngày sinh</Text>
-                        {
-                            data.birth_date !== null ? <Text style={styles.textClick}>{formatDate(new Date(data.birth_date))}  </Text> : <Text style={styles.textClick}> </Text>
-                        }
-                    </View>
-                    <View style={styles.viewChoose}>
-                        <Text style={styles.textTitleInfo}>Địa chỉ</Text>
-                        <Text style={styles.textClick}>{data.address}  </Text>
-                    </View>
-                    <View style={styles.viewChoose1}>
-                        <Text style={styles.textTitleInfo}>Số điện thoại</Text>
-                        <Text style={styles.textClick}>{data.phone}  </Text>
-                    </View>
-                    <View style={styles.viewChoose}>
-                        <Text style={styles.textTitleInfo}>Email</Text>
-                        <Text style={styles.textClick}>{data.email}  </Text>
-                    </View>
-                    <TouchableOpacity style={styles.viewChangePass} onPress={() => this.props.navigation.navigate('ChangePass', { idKH: data.id })}>
-                        <Text style={styles.textChangePass}>Đổi mật khẩu</Text>
-                        <Text style={styles.textChangePass}>➤</Text>
-                    </TouchableOpacity>
-                </View>
+                </ScrollView>
             </View>
         )
     }

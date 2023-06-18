@@ -24,6 +24,25 @@ const styles = StyleSheet.create({
         left: '35%',
         zIndex: 1
     },
+    btnLogout: {
+        position: "absolute",
+        padding: '2%',
+        right: '5%',
+        top: '5%',
+        backgroundColor: colors.mainHome,
+        zIndex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 20,
+        borderColor: colors.greenLight,
+        borderWidth: 2,
+        paddingHorizontal: screenWidth / 23
+    },
+    imgLogout: {
+        height: screenWidth / 13,
+        width: screenWidth / 18,
+        tintColor: colors.text
+    },
     viewAvatar: {
         height: screenWidth / 2.5,
         width: screenWidth / 2.5,

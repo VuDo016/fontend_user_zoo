@@ -89,7 +89,7 @@ export default class ChoiceServiceScreen extends Component {
         return (
             <View style={styles.container}>
                 <View style={styles.item1}>
-                    <TouchableOpacity onPress={() => navigation.navigate('HomeScreen')}>
+                    <TouchableOpacity onPress={() => navigation.pop(6)}>
                         <Image style={styles.iconX} source={require('../../../assets/images/iconX.png')} />
                     </TouchableOpacity>
                     <View style={styles.viewText}>

@@ -1,4 +1,4 @@
-import { FlatList, Text, View, TouchableOpacity, ImageBackground, Image, ScrollView } from 'react-native'
+import { FlatList, Text, View, TouchableOpacity, ImageBackground, Image } from 'react-native'
 import React, { Component } from 'react'
 import Swiper from 'react-native-swiper';
 import { Dimensions } from 'react-native';
@@ -6,6 +6,7 @@ import { Dimensions } from 'react-native';
 import colors from '../../../assets/colors/colors';
 import ButtonBack from '../../components/ButtonBack';
 import { getAllEvent } from '../../../api/service/event';
+import Comment from '../../components/Comment/Comment';
 
 const screenHeight = Dimensions.get('screen').height;
 
@@ -37,9 +38,6 @@ export default class InforEvent extends Component {
     const day = String(date.getDate()).padStart(2, '0');
     const month = String(date.getMonth() + 1).padStart(2, '0');
     const year = date.getFullYear();
-    const hours = String(date.getHours()).padStart(2, '0');
-    const minutes = String(date.getMinutes()).padStart(2, '0');
-    const seconds = String(date.getSeconds()).padStart(2, '0');
 
     const formattedTime = `${day} tháng ${month}`;
     return formattedTime
@@ -65,72 +63,88 @@ export default class InforEvent extends Component {
     }
 
     return (
-      <ScrollView style={styles.big}>
-        <View style={styles.container} >
-          <ButtonBack navigation={navigation} />
-          <View style={styles.viewName}>
-            <Text style={styles.name}>{event.name}</Text>
-            <TouchableOpacity style={styles.buttonViewmore}>
-              <Text style={styles.textName}>ĐẶT BÂY GIỜ</Text>
-            </TouchableOpacity>
-          </View>
-          <ImageBackground style={styles.image} source={{ uri: event.image_url }} >
-            <View style={styles.child} />
-          </ImageBackground>
-          <View style={styles.header}>
-            <Text style={styles.eventType}>TRIỄN LÃM</Text>
-            <Text style={styles.eventStatus}>{statusText}</Text>
-          </View>
-          <View style={styles.content}>
-            <View style={styles.viewRow} >
-              <Image style={styles.icon} source={require('../../../assets/images/calendar.png')} />
-              <Text style={styles.dates}>{this.formatDate(event.start_time)} - {this.formatDate(event.end_time)}</Text>
+      <FlatList
+        style={styles.big}
+        data={[{ key: 'event' }]} // Thêm dữ liệu vào danh sách để tránh lỗi
+        renderItem={({ item }) => (
+          <View style={styles.container} >
+            <ButtonBack navigation={navigation} />
+            <View style={styles.viewName}>
+              <Text style={styles.name}>{event.name}</Text>
+              <TouchableOpacity style={styles.buttonViewmore} onPress={() => navigation.navigate('BuyTicketScreen')}>
+                <Text style={styles.textName}>ĐẶT BÂY GIỜ</Text>
+              </TouchableOpacity>
             </View>
-            <View style={styles.viewRow1} >
-              <Image style={styles.icon} source={require('../../../assets/images/clock.png')} />
-              <Text style={styles.dates}>{event.longTime} giờ</Text>
+            <ImageBackground style={styles.image} overlayColor='rgba(0, 0, 0, 0.8)' source={{ uri: event.image_url }} >
+              <View style={styles.child} />
+            </ImageBackground>
+            <View style={styles.header}>
+              <Text style={styles.eventType}>TRIỄN LÃM</Text>
+              <Text style={styles.eventStatus}>{statusText}</Text>
             </View>
-            <View style={styles.viewRow1} >
-              <Image style={styles.icon} source={require('../../../assets/images/price.png')} />
-              {
-                parseInt(event.price) === 0 ?
-                  <Text style={styles.priceText}>Miễn phí</Text> : <Text style={styles.priceText}>{event.price}0 vnđ</Text>
-              }
+            <View style={styles.content}>
+              <View style={styles.viewRow} >
+                <Image style={styles.icon} source={require('../../../assets/images/calendar.png')} />
+                <Text style={styles.dates}>{this.formatDate(event.start_time)} - {this.formatDate(event.end_time)}</Text>
+              </View>
+              <View style={styles.viewRow1} >
+                <Image style={styles.icon} source={require('../../../assets/images/clock.png')} />
+                <Text style={styles.dates}>{event.longTime} giờ</Text>
+              </View>
+              <View style={styles.viewRow1} >
+                <Image style={styles.icon} source={require('../../../assets/images/price.png')} />
+                {
+                  parseInt(event.price) === 0 ?
+                    <Text style={styles.priceText}>Miễn phí</Text> : <Text style={styles.priceText}>{event.price}0 vnđ</Text>
+                }
+              </View>
+              <View style={styles.viewDescription}>
+                <View style={styles.viewRow2} >
+                  <Text style={styles.location}>Chi tiết sự kiện: </Text>
+                </View>
+                <Text style={styles.dates}>{event.description}</Text>
+              </View>
+              <View style={styles.viewDescription}>
+                <View style={styles.viewRow2} >
+                  <Text style={styles.location}>Địa điểm diễn ra: </Text>
+                  <Text style={styles.textLocation2}>{event.location}</Text>
+                </View>
+                <Image style={styles.imgLocation} source={require('../../../assets/images/splash_bg.jpg')} />
+              </View>
             </View>
-            <View style={styles.viewDescription}>
-              <Text style={styles.location}>Chi tiết sự kiện: </Text>
-              <Text style={styles.dates}>{event.description}</Text>
-            </View>
-            <View style={styles.viewDescription}>
+            <View style={styles.viewDescription1}>
               <View style={styles.viewRow2} >
-                <Text style={styles.location}>Địa điểm diễn ra: </Text>
-                <Text style={styles.textLocation2}>{event.location}</Text>
+                <Text style={styles.location}>Bình luận khách hàng: </Text>
               </View>
-              <Image style={styles.imgLocation} source={require('../../../assets/images/splash_bg.jpg')} />
+              <Comment navigation={navigation} choice={true} id={event.id} />
             </View>
           </View>
-        </View>
-        <Text style={styles.title}>Các sự kiện khác:</Text>
-        <Swiper
-          height={screenHeight / 2}
-          activeDotColor={colors.mainHome}
-          dotColor={colors.greenLight2}
-          dotStyle={{ height: 20, width: 20, borderRadius: 100 }}
-          activeDotStyle={{ height: 20, width: 20, borderRadius: 100 }}
-        >
-          {randomEvents.map((item, index) => (
-            <TouchableOpacity key={index} style={styles.viewListEvent} onPress={() => navigation.navigate('InforEvent', { data: item })}>
-              <Image style={styles.imageEvent} source={{ uri: item.image_url }} />
-              <Text style={styles.textDateEvent}>TỪ {this.formatDate(item.start_time)} - {this.formatDate(item.end_time)}</Text>
-              <View style={styles.viewTextNameEvent}>
-                <Text style={styles.textArrowEvent}>→</Text>
-                <Text style={styles.textNameEvent}>{item.name}</Text>
-              </View>
-              <Text style={styles.textInfoEvent}>{item.description_short}</Text>
-            </TouchableOpacity>
-          ))}
-        </Swiper>
-      </ScrollView>
+        )}
+        ListFooterComponent={
+          <View>
+            <Text style={styles.title}>Các sự kiện khác:</Text>
+            <Swiper
+              height={screenHeight / 2}
+              activeDotColor={colors.mainHome}
+              dotColor={colors.greenLight2}
+              dotStyle={{ height: 20, width: 20, borderRadius: 100 }}
+              activeDotStyle={{ height: 20, width: 20, borderRadius: 100 }}
+            >
+              {randomEvents.map((item, index) => (
+                <TouchableOpacity key={index} style={styles.viewListEvent} onPress={() => navigation.navigate('InforEvent', { data: item })}>
+                  <Image style={styles.imageEvent} source={{ uri: item.image_url }} />
+                  <Text style={styles.textDateEvent}>TỪ {this.formatDate(item.start_time)} - {this.formatDate(item.end_time)}</Text>
+                  <View style={styles.viewTextNameEvent}>
+                    <Text style={styles.textArrowEvent}>→</Text>
+                    <Text style={styles.textNameEvent}>{item.name}</Text>
+                  </View>
+                  <Text style={styles.textInfoEvent}>{item.description_short}</Text>
+                </TouchableOpacity>
+              ))}
+            </Swiper>
+          </View>
+        }
+      />
 
     )
   }

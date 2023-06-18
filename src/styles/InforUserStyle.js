@@ -1,21 +1,26 @@
 import { StyleSheet } from "react-native"
+import { Dimensions } from 'react-native';
 
-import colors from "../../assets/colors/colors"
+import colors from "../../assets/colors/colors";
+const screenHeight = Dimensions.get('screen').height;
+const screenWidth = Dimensions.get('screen').width;
 
 const styles = StyleSheet.create({
     container: {
         flex: 1
     },
     header: {
-        flex: 1,
+        height: screenWidth / 6,
+        width: '100%',
         backgroundColor: colors.greenLight2,
         flexDirection: 'row',
         alignItems: 'center'
     },
     btnEdit: {
-        flex: 0.2,
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        position: 'absolute',
+        right: '5%'
     },
     iconArrow: {
         height: 20,
@@ -32,7 +37,7 @@ const styles = StyleSheet.create({
         marginLeft: 20
     },
     info: {
-        flex: 7,
+        flex: 10,
         backgroundColor: colors.whiteDarkLight
     },
     imageCover: {
@@ -94,6 +99,18 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         color: colors.mainHome
     },
+    viewCancle: {
+        position: 'absolute',
+        right: '0%',
+        top: '105%',
+        height: '25%',
+        width: '40%',
+        backgroundColor: colors.greenLight,
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: 20,
+        borderWidth: 1
+    }
 })
 
 export default styles

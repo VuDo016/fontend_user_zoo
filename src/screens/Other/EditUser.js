@@ -3,7 +3,9 @@ import React, { Component } from 'react'
 
 import styles from '../../styles/EditUserStyle.js'
 import { update_Khachhang } from '../../../api/method/put.js';
+import { uploadImageUser, delImageFire } from '../../../api/service/account.js';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 
 export default class EditUser extends Component {
     constructor(props) {
@@ -20,9 +22,34 @@ export default class EditUser extends Component {
             anhDaiDien: '',
             date: new Date(this.props.route.params.data.birth_date),
             gender: this.props.route.params.data.gender,
-            show: false
+            show: false,
+            images: []
         };
     }
+
+    selectImageFromLibrary = () => {
+        launchImageLibrary({ mediaType: 'photo' }, response => {
+            if (!response.didCancel && !response.error) {
+                const image = response.assets[0].uri;
+
+                this.setState(prevState => ({
+                    images: [...prevState.images, image],
+                }));
+            }
+        });
+    };
+
+    takePhoto = () => {
+        launchCamera({ mediaType: 'photo' }, response => {
+            if (!response.didCancel && !response.error) {
+                const image = response.uri;
+
+                this.setState(prevState => ({
+                    images: [...prevState.images, image],
+                }));
+            }
+        });
+    };
 
     setValue(text, index) {
         if (index === 1)
@@ -43,7 +70,7 @@ export default class EditUser extends Component {
             this.setState({ anhDaiDien: text })
     }
 
-    UpdateKH(idKH) {
+    async UpdateKH(idKH) {
         const data = this.props.route.params.data
         if (this.state.ho !== '')
             data.first_name = this.state.ho
@@ -55,13 +82,32 @@ export default class EditUser extends Component {
             data.phone = this.state.sdt
         if (this.state.email !== '')
             data.email = this.state.email
-        if (this.state.anhDaiDien !== '')
-            data.avatar_url = this.state.anhDaiDien
 
         data.gender = this.state.gender ? 1 : 0
         data.birth_date = this.state.date
 
-        update_Khachhang(data, idKH)
+        const imgAvatar = data.avatar_url
+        const imgChoice = this.state.images
+
+        if (imgAvatar === null) {
+            if (imgChoice.length === 0)
+                data.avatar_url = imgAvatar
+            else {
+                data.avatar_url = imgChoice[0]
+                await uploadImageUser(imgChoice, 'user', data.id)
+            }
+        }
+        else {
+            if (imgChoice.length === 0)
+                data.avatar_url = imgAvatar
+            else {
+                data.avatar_url = imgChoice[0]
+                await delImageFire('user', imgAvatar, data.id)
+                await uploadImageUser(imgChoice, 'user', data.id)  
+            }
+        }
+
+        await update_Khachhang(data, idKH)
     }
 
     setDate = (event, date) => {
@@ -90,7 +136,7 @@ export default class EditUser extends Component {
 
     render() {
         const data = this.props.route.params.data
-        const { show, date, mode, gender } = this.state
+        const { show, date, mode, gender, images } = this.state
 
         const formatDate = (date) => {
             return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
@@ -98,7 +144,7 @@ export default class EditUser extends Component {
 
         return (
             <ScrollView>
-                <TouchableOpacity onPress={() => this.props.navigation.goBack()} style={styles.header}>
+                <TouchableOpacity onPress={() => this.props.navigation.navigate('InforUser', { data: data })} style={styles.header}>
                     <Image
                         style={styles.iconArrow}
                         source={require('../../../assets/images/IconBack.png')}
@@ -107,10 +153,22 @@ export default class EditUser extends Component {
                 </TouchableOpacity>
                 <View style={styles.info}>
                     <ImageBackground style={styles.imageCover} source={require('../../../assets/images/background.png')}>
-                        <Image
-                            style={styles.imageAvatar}
-                            source={data.anhDaiDien === null ? (data.gioiTinh ? require('../../../assets/images/background.png') : require('../../../assets/images/background.png')) : { uri: data.avatar_url }}
-                        />
+                        {images.length <= 0 ?
+                            <Image
+                                style={styles.imageAvatar}
+                                source={data.avatar_url ? { uri: data.avatar_url } : require('../../../assets/images/iconProfile/avatar.png')}
+                            /> :
+                            <Image
+                                style={styles.imageAvatar}
+                                source={{ uri: images[0] }}
+                            />
+                        }
+                        <TouchableOpacity style={styles.btnEdit} onPress={this.selectImageFromLibrary}>
+                            <Image
+                                style={styles.iconEdit}
+                                source={require('../../../assets/images/iconProfile/editProfile.png')}
+                            />
+                        </TouchableOpacity>
                     </ImageBackground>
                     <View style={styles.viewChoose}>
                         <Text style={styles.textTitleInfo}>Họ</Text>

@@ -11,7 +11,7 @@ export const update_Khachhang = async (body, idKH) => {
     const response = await fetch(https + 'account',
         {
             method: "PUT",
-            headers: { 'Content-Type': 'application/json; charset=utf-8', 'Authorization': await getToken()},
+            headers: { 'Content-Type': 'application/json; charset=utf-8', 'Authorization': await getToken() },
             body: JSON.stringify({
                 id: idKH,
                 first_name: body.first_name,
@@ -27,16 +27,16 @@ export const update_Khachhang = async (body, idKH) => {
     const resJson = await response.json();
 
     if (resJson.message === "Update the user succeeds!")
-        alert('Cập nhật thành công !!!')   
-    else 
-        alert('Cập nhật thất bại !!!')   
+        alert('Cập nhật thành công !!!')
+    else
+        alert('Cập nhật thất bại !!!')
 }
 
 export const update_PasswordKH = async (pass, newPass, idKH) => {
     const response = await fetch(https + 'account/updatePass',
         {
             method: "PUT",
-            headers: { 'Content-Type': 'application/json; charset=utf-8', 'Authorization': await getToken()},
+            headers: { 'Content-Type': 'application/json; charset=utf-8', 'Authorization': await getToken() },
             body: JSON.stringify({
                 idKH: idKH,
                 newPass: newPass,
@@ -52,9 +52,18 @@ export const updateByValue = async (url, value) => {
     const response = await fetch(https + url + '/' + value,
         {
             method: "PUT",
-            headers: { 'Content-Type': 'application/json; charset=utf-8', 'Authorization': await getToken()}
+            headers: { 'Content-Type': 'application/json; charset=utf-8', 'Authorization': await getToken() }
         })
     const resJson = await response.json();
 
     return resJson
+}
+
+export const putNotVale = async (bodyData, url) => {
+    await fetch(https + url,
+        {
+            method: "PUT",
+            headers: { 'Content-Type': 'application/json; charset=utf-8', 'Authorization': await getToken() },
+            body: JSON.stringify(bodyData),
+        })
 }

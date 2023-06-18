@@ -24,6 +24,7 @@ import CreateNew from './components/Comment/CreateComment';
 import ContactUs from './screens/Other/ContactUs';
 import Donation from './screens/Other/Donation';
 import WhyDonation from './screens/Other/WhyDonation';
+import RefundScreen from './screens/Other/RefundScreen';
 
 const stack = createNativeStackNavigator();
 
@@ -59,6 +60,7 @@ export default class Main extends Component {
         <stack.Screen name="ContactUs" component={ContactUs} />
         <stack.Screen name="Donation" component={Donation} />
         <stack.Screen name="WhyDonation" component={WhyDonation} />
+        <stack.Screen name="RefundScreen" component={RefundScreen} />
       </stack.Navigator>
     </NavigationContainer>
     )

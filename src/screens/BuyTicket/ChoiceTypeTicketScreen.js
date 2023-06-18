@@ -62,11 +62,11 @@ export default class ChoiceTypeTicket extends Component {
             require('../../../assets/images/childen.png'),
             require('../../../assets/images/oldman.png')
         ]
-
+          
         return (
             <View style={styles.container}>
                 <View style={styles.item1}>
-                    <TouchableOpacity onPress={() => navigation.navigate('HomeScreen')}>
+                    <TouchableOpacity onPress={() => navigation.pop(2)}>
                         <Image style={styles.iconX} source={require('../../../assets/images/iconX.png')} />
                     </TouchableOpacity>
                     <View style={styles.viewText}>

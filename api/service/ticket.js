@@ -1,20 +1,21 @@
-import { getAll, getByValue1 } from "../method/get";
+import { getAllnottoken, getByValue1 } from "../method/get";
 import { post } from "../method/post";
+import { putNotVale } from "../method/put";
 
 export const getVehicle = async () => {
-    return await getAll('ticket/service', 'vehicleTickets')
+    return await getAllnottoken('ticket/service', 'vehicleTickets')
 }
 
 export const getBoating = async () => {
-    return await getAll('ticket/service', 'boatingTickets')
+    return await getAllnottoken('ticket/service', 'boatingTickets')
 }
 
 export const getTentRentals = async () => {
-    return await getAll('ticket/service', 'tentRentals')
+    return await getAllnottoken('ticket/service', 'tentRentals')
 }
 
 export const getTicketCategory = async () => {
-    return await getAll('ticket/ticket', 'ticketCategories')
+    return await getAllnottoken('ticket/ticket', 'ticketCategories')
 }
 
 export const getBillNew = async () => {
@@ -35,12 +36,13 @@ export const getBillById = async (id) => {
 
 ///post////
 
-export const createBill = async (totalQuantity, totalPrice, visitDate, userId) => {
+export const createBill = async (totalQuantity, totalPrice, visitDate, userId, codeBill) => {
     const bodyData = {
         totalQuantity: totalQuantity,
         totalPrice: totalPrice,
         visitDate: visitDate,
-        userId: userId
+        userId: userId,
+        codeBill: codeBill
     }
 
     return await post(bodyData, 'ticket/bill', 'ticketHistoryId')
@@ -73,4 +75,13 @@ export const updateQRcode = async (dataQRcode, userId) => {
     }
 
     return await post(bodyData, 'ticket/generate-qr-code', 'success')
+}
+
+export const reqCancel = async (ticketId, isCancelValue) => {
+    const bodyData = {
+        ticketId,
+        isCancelValue
+    }
+
+    await putNotVale(bodyData, 'ticket/reqCancle')
 }

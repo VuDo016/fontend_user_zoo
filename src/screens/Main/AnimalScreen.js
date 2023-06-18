@@ -98,7 +98,7 @@ export default class AnimalScreen extends Component {
         ListFooterComponent={
           <>
             <View style={styles.viewFoot}>
-              <Comment navigation={navigation} />
+              {/* <Comment navigation={navigation} /> */}
               <Text style={styles.textNumber}>Bạn đã xem {limit < size ? limit : size} trên {size} động vật</Text>
               {
                 limit < size ?

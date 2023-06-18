@@ -350,9 +350,10 @@ const styles = StyleSheet.create({
     backgroundColor: colors.text
   },
   itemHis: {
-    height: screenHeight / 7,
+    height: screenHeight / 6,
     width: screenWidth / 1.1,
-    margin: '5%',
+    marginHorizontal: '5%',
+    marginVertical: '7%',
     borderRadius: 10,
     borderColor: colors.dark,
     borderWidth: 2,
@@ -370,7 +371,8 @@ const styles = StyleSheet.create({
   },
   statusHis1: {
     height: '60%',
-    width: '25%',
+    width: 'auto',
+    paddingHorizontal: '5%',
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 5

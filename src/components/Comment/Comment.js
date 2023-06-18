@@ -4,7 +4,7 @@ import React, { Component } from 'react'
 import styles from '../../styles/CommentStyles';
 import colors from '../../../assets/colors/colors';
 import Rating from './Rating';
-import { getDanhgia_byIDAnimal } from '../../../api/service/comment';
+import { getDanhgia_byIDAnimal, getDanhgia_byIDEvent } from '../../../api/service/comment';
 
 export default class Comment extends Component {
   constructor(props) {
@@ -18,8 +18,13 @@ export default class Comment extends Component {
   }
 
   async getComment() {
+    const choice = this.props.choice
+    const id = this.props.id
     try {
-      this.setState({ danhgia: await getDanhgia_byIDAnimal(1) });
+      if (choice)
+        this.setState({ danhgia: await getDanhgia_byIDEvent(id) });
+      else
+        this.setState({ danhgia: await getDanhgia_byIDAnimal(id) });
     } catch (error) {
       console.log(error);
     } finally {
@@ -69,38 +74,39 @@ export default class Comment extends Component {
             <ActivityIndicator color={colors.mainHome} size={25} />
             <Text style={styles.textName}>Đang tải dữ liệu</Text>
           </View> : (
-            <FlatList
-              data={danhgia}
-              initialNumToRender={10}
-              renderItem={({ item }) => (
-                <View key={item.id} style={styles.view2}>
-                  <Image
-                    style={styles.avatar}
-                    source={{ uri: item.employer.avatar_url }}
-                  />
-                  <View style={styles.viewBig}>
-                    <Text style={styles.textAll}>{item.employer.name} {item.employer.first_name}</Text>
-                    <View style={styles.rating}>
-                      <Rating rating={item.rating} />
-                    </View>
-                    <Text style={styles.textCommen}>{item.comment}</Text>
-                    <FlatList
-                      data={item.images}
-                      horizontal={true}
-                      keyExtractor={({ id }, index) => index}
-                      renderItem={({ item, index }) => (
-                        <Image key={index} source={{ uri: item }} style={styles.ImageComen} />
-                      )}
+            danhgia.length === 0 ?
+              <View style={styles.viewNULL}>
+                <Text style={styles.textCommen}>Hiện không có đánh giá nào !!!</Text>
+              </View>
+              :
+              <FlatList
+                data={danhgia}
+                initialNumToRender={10}
+                renderItem={({ item }) => (
+                  <View key={item.id} style={styles.view2}>
+                    <Image
+                      style={styles.avatar}
+                      source={item.employer.avatar_url ? { uri: item.employer.avatar_url } : require('../../../assets/images/iconProfile/avatar.png')}
                     />
-                    <Text style={styles.textAll}>{formatDate(new Date(item.created_at))}</Text>
-                    {/* <View style={styles.viewFeedback}>
-                  <Text style={styles.textSaleChat}>Phản hồi của người bán:</Text>
-                  <Text style={styles.textSaleChatComen}>Thank you for your purchase and taking the time to write a product review. Customer reviews is important to us and we value your response. If you have any questions, please contact our customer service.All responses will be used to further improve the quality of our service and products.Sorry for the inconvenience and thank you for giving us the opportunity to rectify the matter.😔😔</Text>
-                </View> */}
+                    <View style={styles.viewBig}>
+                      <Text style={styles.textAll}>{item.employer.name} {item.employer.first_name}</Text>
+                      <View style={styles.rating}>
+                        <Rating rating={item.rating} />
+                      </View>
+                      <Text style={styles.textCommen}>{item.comment}</Text>
+                      <FlatList
+                        data={item.images}
+                        horizontal={true}
+                        keyExtractor={({ id }, index) => index}
+                        renderItem={({ item, index }) => (
+                          <Image key={index} source={{ uri: item }} style={styles.ImageComen} />
+                        )}
+                      />
+                      <Text style={styles.textAll}>{formatDate(new Date(item.created_at))}</Text>
+                    </View>
                   </View>
-                </View>
-              )}
-            />
+                )}
+              />
           )}
       </View>
     )

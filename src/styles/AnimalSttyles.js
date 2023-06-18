@@ -108,11 +108,12 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     viewFoot: {
-        height: '20%',
+        height: screenHeight / 6,
         justifyContent: 'center',
         alignItems: 'center',
         justifyContent: 'space-between',
-        position: 'absolute'
+        paddingTop: '2%',
+        paddingBottom: '7%'
     },
     buttonViewmore: {
         justifyContent: 'center',
@@ -167,6 +168,13 @@ const styles = StyleSheet.create({
         fontSize: 35,
         color: colors.black,
         fontFamily: 'MiraikatoScriptPERSONALUSE-Bold'
+    },
+    textComment1: {
+        fontSize: 25,
+        color: colors.black,
+        fontFamily: 'MiraikatoScriptPERSONALUSE-Bold',
+        textAlign: 'center',
+        marginTop: '10%'
     },
     textInfo1: {
         fontSize: 25,

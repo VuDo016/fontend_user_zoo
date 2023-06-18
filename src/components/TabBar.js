@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, Image, TouchableOpacity } from 'react-native';
+import { Text, View, Image, TouchableOpacity, LogBox } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import styles from '../styles/TabBarStyles';
@@ -9,6 +9,11 @@ import AnimalScreen from '../screens/Main/AnimalScreen';
 import MapScreen from '../screens/Main/MapScreen';
 import ProfileScreen from '../screens/Main/ProfileScreen';
 
+LogBox.ignoreLogs([
+  'Image source \"\" doesn\'t exist',
+  'source.uri should not be an empty string'
+]);
+
 function Screen1({ navigation }) {
   return (
     <View>
@@ -16,7 +21,7 @@ function Screen1({ navigation }) {
     </View>
   );
 }
-
+ 
 function Screen2({ navigation }) {
   return (
     <View>
