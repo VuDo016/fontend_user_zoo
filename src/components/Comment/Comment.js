@@ -34,15 +34,17 @@ export default class Comment extends Component {
 
 
   componentDidMount() {
-    // this.props.navigation.addListener('focus', () => {
-    this.getComment();
-    // });
+    this.props.navigation.addListener('focus', () => {
+      this.getComment();
+    });
   }
 
 
   render() {
     const { danhgia, isLoading, notAnh } = this.state;
     const navigation = this.props.navigation
+    const choice = this.props.choice
+    const id = this.props.id
 
     const formatDate = (date) => {
       return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
@@ -64,7 +66,7 @@ export default class Comment extends Component {
               <Text>Sao</Text>
               <Text style={styles.textNumber}>(Tất cả)</Text>
             </View>
-            <TouchableOpacity style={styles.optionReview} onPress={() => navigation.navigate('CreateNew')}>
+            <TouchableOpacity style={styles.optionReview} onPress={() => navigation.navigate('CreateNew', {choice: choice, id: id})}>
               <Text style={styles.textReview}>Đánh giá</Text>
             </TouchableOpacity>
           </View>

@@ -98,7 +98,7 @@ export default class Donation extends Component {
                             }
                         </View>
                     </View>
-                    <View style={styles.selectGroup}>
+                    {/* <View style={styles.selectGroup}>
                         <Text style={[styles.fieldTitle]}>Bạn muốn quyên góp bao lâu một lần?</Text>
                         <View style={styles.radioButtonContainer}>
                             <CheckBox
@@ -121,7 +121,7 @@ export default class Donation extends Component {
                             />
                             <Text style={[styles.radioButtonLabel, { marginLeft: screenWidth * 0.02 }]}>Hàng năm</Text>
                         </View>
-                    </View>
+                    </View> */}
 
                     <TouchableOpacity style={[styles.button, { height: screenHeight * 0.07 }]} onPress={() => this.handleDonatePress(donationAmount)}>
                         <Text style={styles.buttonText}>Quyên góp ngay !</Text>

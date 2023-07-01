@@ -41,9 +41,9 @@ export default class TicketsPaidScreen extends Component {
         this.setState({ more })
     }
 
-    componentDidMount() {
+    async componentDidMount() {
         const navigation = this.props.navigation;
-        this.getBillNew(navigation);
+        await this.getBillNew(navigation);
     }
 
     formatDate(date) {

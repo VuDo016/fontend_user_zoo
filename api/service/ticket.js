@@ -1,4 +1,4 @@
-import { getAllnottoken, getByValue1 } from "../method/get";
+import { getAllnottoken, getByValue1, getAll } from "../method/get";
 import { post } from "../method/post";
 import { putNotVale } from "../method/put";
 

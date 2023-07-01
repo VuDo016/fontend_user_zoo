@@ -96,7 +96,7 @@ export default class VNpayScreen extends Component {
 
   render() {
     const { paymentResultUrl, ticket } = this.state;
-    const url = 'http://192.168.1.154:3000/api/payment/create_payment_url/' + ticket.totalPrice
+    const url = 'http://54.254.72.36:3000/api/payment/create_payment_url/' + ticket.totalPrice
 
     return (
       <View style={{ flex: 1 }}>

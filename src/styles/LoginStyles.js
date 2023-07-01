@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
     viewBtnText1: {
         flexDirection: 'row',
         position: 'absolute',
-        bottom: '10%'
+        bottom: '5%'
     }
 })
 
